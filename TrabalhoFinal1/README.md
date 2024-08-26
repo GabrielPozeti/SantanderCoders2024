@@ -1,3 +1,8 @@
+Projeto Final do módulo Lógica de Programação I.
+
+Consiste em uma agenda telefônica que recebe dados como nome, número e email, exibindo-os na agenda e permitindo editá-los conforme a necessidade do usuário.
+
+
 Quais foram os desafios no projeto?
 
 - Os desafios do projeto foram encontrados na utilização de novas classes, como as ArraysLists, que não necessariamente foram dificeis de serem aplicadas, mas, como algo novo, demandavam tempo para melhor aplica-las.
