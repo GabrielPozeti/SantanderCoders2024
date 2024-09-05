@@ -24,10 +24,10 @@ public class Cassino {
             while (true) {
                 exibirLogoCassino();
 
-                System.out.println("Sistema de Cadastro e Login:");
+                System.out.println("Sistema de Cadastro e Login:\n");
                 System.out.println("1. Cadastrar novo usuário");
                 System.out.println("2. Fazer login");
-                System.out.println("0. Sair");
+                System.out.println("0. Sair\n");
 
                 int escolha = lerEscolha(scanner);
 
@@ -40,7 +40,7 @@ public class Cassino {
                         if (usuarioLogado != null) {
                             menuPrincipal(usuarioLogado);
                         } else {
-                            System.out.println("Login falhou. Tente novamente.");
+                            System.out.println("O login falhou. Tente novamente.");
                         }
                         break;
                     case 0:
@@ -57,12 +57,12 @@ public class Cassino {
         try (Scanner scanner = new Scanner(System.in)) {
             boolean continuar = true;
             while (continuar) {
-                System.out.println("\nEscolha o jogo que deseja jogar:");
+                System.out.println("\nEscolha o jogo que deseja jogar:\n");
                 System.out.println("1. Blackjack");
                 System.out.println("2. Roleta");
                 System.out.println("3. Jogo de Dados");
-                System.out.println("4. Raspadinha"); // Nova opção
-                System.out.println("0. Sair");
+                System.out.println("4. Raspadinha");
+                System.out.println("0. Sair\n");
     
                 int opcao = lerEscolha(scanner);
     

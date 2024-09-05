@@ -3,9 +3,9 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Usuario {
-    private String nome;
-    private String senha;
-    private int idade;
+    private final String nome;
+    private final String senha;
+    private final int idade;
     private double saldo;
 
     private static List<Usuario> usuarios = new ArrayList<>();
@@ -44,7 +44,7 @@ public class Usuario {
         scanner.nextLine();
 
         if (idade < 18) {
-            System.out.println("Desculpe, apenas maiores de 18 anos podem se cadastrar.");
+            System.out.println("Desculpe, apenas maiores de 18 anos podem se cadastrar.\n");
             return;
         }
 
@@ -57,7 +57,7 @@ public class Usuario {
 
         Usuario novoUsuario = new Usuario(nome, senha, idade);
         usuarios.add(novoUsuario);
-        System.out.println("Cadastro realizado com sucesso! Seu saldo inicial é de R$ 1.000,00.");
+        System.out.println("Cadastro realizado com sucesso! Seu saldo inicial é de R$ 1.000,00.\n");
     }
 
     public static Usuario iniciarLogin() {
