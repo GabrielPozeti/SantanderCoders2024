@@ -45,7 +45,7 @@ public class Cassino {
                         break;
                     case 0:
                         System.out.println("Saindo...");
-                        return;
+                        System.exit(0);
                     default:
                         System.out.println("Opção inválida.");
                 }

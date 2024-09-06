@@ -1,3 +1,4 @@
+import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -20,14 +21,39 @@ public class Roleta {
                 return;
             }
 
-            System.out.print("Aposte em um número de 0 a 36: ");
-            int numeroApostado = scanner.nextInt();
+            int numeroApostado = -1;
+            while(numeroApostado < 0 || numeroApostado > 36) {
+                try {
+                    System.out.print("Aposte em um número de 0 a 36: ");
+                    numeroApostado = scanner.nextInt();
+                    if (numeroApostado < 0 || numeroApostado > 36) {
+                        System.out.println("Numero Inválido, por favor digite apenas números entre 0 e 36.");
+                    }
+                } catch (InputMismatchException e) {
+                    System.out.println("Entrada inválida. Por favor, insira apenas números.");
+                    scanner.nextLine();
+                }
+            }
 
-            System.out.print("Escolha uma cor (Vermelho ou Preto): ");
-            String corApostada = scanner.next();
+            String corApostada = "";
+            while (!corApostada.equals("VERMELHO") && !corApostada.equals("PRETO")) {
+                System.out.print("Escolha uma cor (Vermelho ou Preto): ");
+                corApostada = scanner.nextLine();
+                corApostada = corApostada.toUpperCase();
+
+                if (!corApostada.equals("VERMELHO") && !corApostada.equals("PRETO")) {
+                    System.out.println("Cor inválida. Por favor, escolha entre VERMELHO ou PRETO.");
+                }
+            }
 
             int numeroSorteado = random.nextInt(37);
-            String corSorteada = random.nextBoolean() ? "Vermelho" : "Preto";
+
+            String corSorteada;
+            if (random.nextBoolean()) {
+                corSorteada = "Vermelho";
+            } else {
+                corSorteada = "Preto";
+            }
 
             System.out.println("A roleta parou no número " + numeroSorteado + " e na cor " + corSorteada + ".");
 

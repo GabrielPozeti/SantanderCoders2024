@@ -17,11 +17,16 @@ public class Carta {
 
     public int getValorNumerico() {
         switch (valor) {
-            case "A": return 11;
-            case "2": case "3": case "4": case "5": case "6":
-            case "7": case "8": case "9": case "10": return Integer.parseInt(valor);
-            case "J": case "Q": case "K": return 10;
-            default: throw new IllegalArgumentException("Valor da carta inválido");
+            case "A" -> {
+                return 11;
+            }
+            case "2", "3", "4", "5", "6", "7", "8", "9", "10" -> {
+                return Integer.parseInt(valor);
+            }
+            case "J", "Q", "K" -> {
+                return 10;
+            }
+            default -> throw new IllegalArgumentException("Valor da carta inválido");
         }
     }
 

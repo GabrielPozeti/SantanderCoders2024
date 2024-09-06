@@ -1,3 +1,4 @@
+import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -19,10 +20,15 @@ public class JogoDeDados {
 
         int numeroApostado = 0;
         while(numeroApostado <2 || numeroApostado > 12) {
-            System.out.print("Aposte em um número de 2 a 12 (soma de dois dados): ");
-            numeroApostado = scanner.nextInt();
-            if (numeroApostado <2 || numeroApostado > 12){
-                System.out.println("Numero Inválido, por favor digite apenas números entre 2 e 12.");
+            try {
+                System.out.print("Aposte em um número de 2 a 12 (soma de dois dados): ");
+                numeroApostado = scanner.nextInt();
+                if (numeroApostado < 2 || numeroApostado > 12) {
+                    System.out.println("Numero Inválido, por favor digite apenas números entre 2 e 12.");
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("Entrada inválida. Por favor, insira apenas números.");
+                scanner.nextLine();
             }
         }
 

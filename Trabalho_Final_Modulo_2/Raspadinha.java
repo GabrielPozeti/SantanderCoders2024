@@ -18,7 +18,7 @@ public class Raspadinha {
             return;
         }
 
-        // Criação das opções com 7 prêmios e 13 valores "Nada"
+
         String[] opcoes = new String[20];
         for (int i = 0; i < opcoes.length; i++) {
             opcoes[i] = "Nada";
@@ -29,12 +29,12 @@ public class Raspadinha {
         opcoes[indicesPremios[0]] = "10x o valor apostado";
         opcoes[indicesPremios[1]] = "5x o valor apostado";
         opcoes[indicesPremios[2]] = "Dobro do valor apostado";
-        opcoes[indicesPremios[3]] = "R$ 50";
-        opcoes[indicesPremios[4]] = "R$ 20";
-        opcoes[indicesPremios[5]] = "R$ 10";
-        opcoes[indicesPremios[6]] = "R$ 5";
+        opcoes[indicesPremios[3]] = "R$ 500";
+        opcoes[indicesPremios[4]] = "R$ 200";
+        opcoes[indicesPremios[5]] = "R$ 100";
+        opcoes[indicesPremios[6]] = "R$ 50";
 
-        // Embaralhar as opções
+
         for (int i = opcoes.length - 1; i > 0; i--) {
             int j = random.nextInt(i + 1);
             String temp = opcoes[i];
@@ -42,12 +42,13 @@ public class Raspadinha {
             opcoes[j] = temp;
         }
 
-        // Mostrar opções para o usuário
         System.out.println("Escolha uma das 20 opções:");
-        for (int i = 0; i < opcoes.length; i++) {
-            System.out.println((i + 1) + ". Opção " + (i + 1));
+        for (int i = 0; i < 20; i++) {
+            System.out.printf("%-15s","Opção " + (i + 1));
+            if ((i + 1) % 4 == 0) {
+                System.out.println();
+            }
         }
-
         int escolha = lerEscolha(scanner);
 
         if (escolha < 1 || escolha > 20) {
@@ -55,47 +56,46 @@ public class Raspadinha {
             return;
         }
 
-        // Mostrar resultado
-        String premioEscolhido = opcoes[escolha - 1];
-        System.out.println("Você escolheu a opção " + escolha);
-        System.out.println("Resultado: " + premioEscolhido);
 
-        double valorPremio = 0;
-        if (premioEscolhido.equals("10x o valor apostado")) {
-            valorPremio = valorAposta * 10;
-        } else if (premioEscolhido.equals("5x o valor apostado")) {
-            valorPremio = valorAposta * 5;
-        } else if (premioEscolhido.equals("Dobro do valor apostado")) {
-            valorPremio = valorAposta * 2;
-        } else if (premioEscolhido.equals("R$ 50")) {
-            valorPremio = 50;
-        } else if (premioEscolhido.equals("R$ 20")) {
-            valorPremio = 20;
-        } else if (premioEscolhido.equals("R$ 10")) {
-            valorPremio = 10;
-        } else if (premioEscolhido.equals("R$ 5")) {
-            valorPremio = 5;
-        } else {
-            valorPremio = 0;
-        }
+        String premioEscolhido = opcoes[escolha - 1];
+        System.out.println("\nVocê escolheu a opção " + escolha);
+        System.out.println("\nResultado: " + premioEscolhido);
+
+        double valorPremio = switch (premioEscolhido) {
+            case "10x o valor apostado" -> valorAposta * 10;
+            case "5x o valor apostado" -> valorAposta * 5;
+            case "Dobro do valor apostado" -> valorAposta * 2;
+            case "R$ 500" -> 500;
+            case "R$ 200" -> 200;
+            case "R$ 100" -> 100;
+            case "R$ 50" -> 50;
+            default -> 0;
+        };
 
         if (valorPremio > 0) {
             usuario.setSaldo(usuario.getSaldo() + valorPremio);
-            System.out.println("Parabéns! Você ganhou " + premioEscolhido);
+            System.out.println("Parabéns! Você ganhou " + premioEscolhido + "!");
         } else {
             usuario.setSaldo(usuario.getSaldo() - valorAposta);
             System.out.println("Você não ganhou nada. Tente novamente!");
         }
 
-        // Mostrar valores de todas as opções
-        System.out.println("Valores das opções restantes:");
+
+        System.out.println("\nO que havia nas outras raspadinhas:");
+
         for (int i = 0; i < opcoes.length; i++) {
-            if (i != escolha - 1) {
-                System.out.println((i + 1) + ". " + opcoes[i]);
+            if (i == escolha - 1) {
+                System.out.printf("%-30s", (i + 1) + ". Sua escolha");
+            } else {
+                System.out.printf("%-30s", (i + 1) + ". " + opcoes[i]);
+            }
+
+            if ((i + 1) % 4 == 0 || i == opcoes.length - 1) {
+                System.out.println();
             }
         }
 
-        System.out.println("Seu novo saldo é: R$ " + usuario.getSaldo());
+        System.out.println("\nSeu novo saldo é de: R$ " + usuario.getSaldo());
     }
 
     private static double lerDouble(Scanner scanner) {
