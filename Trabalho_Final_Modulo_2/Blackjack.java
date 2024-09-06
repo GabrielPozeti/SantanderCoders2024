@@ -74,7 +74,7 @@ public class Blackjack {
                 System.out.println("Empate!");
             }
 
-            System.out.println("Seu saldo atual é: R$ " + usuario.getSaldo());
+            System.out.println("Seu novo saldo é de: R$ " + usuario.getSaldo());
 
             System.out.println("\nEscolha uma opção:");
             System.out.println("1. Jogar novamente");
