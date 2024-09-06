@@ -65,6 +65,7 @@ public class Cassino {
                 System.out.println("2. Roleta");
                 System.out.println("3. Jogo de Dados");
                 System.out.println("4. Raspadinha");
+                System.out.println("5. Empréstimo Bancário Santander");
                 System.out.println("0. Sair\n");
     
                 int opcao = lerEscolha(scanner);
@@ -81,6 +82,9 @@ public class Cassino {
                         break;
                     case 4:
                         Raspadinha.iniciarJogo(usuario);
+                        break;
+                    case 5:
+                        Santander.emprestimoSantander(usuario);
                         break;
                     case 0:
                         continuar = false;
