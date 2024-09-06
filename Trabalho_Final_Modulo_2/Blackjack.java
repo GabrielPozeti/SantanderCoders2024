@@ -14,9 +14,9 @@ public class Blackjack {
         while (jogarNovamente) {
             Baralho baralho = new Baralho();
 
-            System.out.println("Bem-vindo ao Blackjack!");
-            System.out.println("Seu saldo atual é: R$ " + usuario.getSaldo());
-            System.out.print("Digite o valor da aposta: ");
+            System.out.println("\nBem-vindo ao Blackjack!");
+            System.out.println("\nSeu saldo atual é: R$ " + usuario.getSaldo());
+            System.out.print("\nDigite o valor da aposta: ");
             double valorAposta = scanner.nextDouble();
             scanner.nextLine();
 
@@ -44,17 +44,19 @@ public class Blackjack {
                     System.out.println(jogador.mostrarMao());
                     System.out.println("Pontuação do jogador: " + jogador.calcularPontuacao());
                 } else if (acao.equalsIgnoreCase("p")) {
+                    System.out.println();
                     break;
                 }
             }
 
-            System.out.println("\nMão do dealer:");
+
             System.out.println(dealer.mostrarMao());
             while (dealer.calcularPontuacao() < 17) {
                 dealer.receberCarta(baralho.distribuirCarta());
                 System.out.println(dealer.mostrarMao());
             }
-            System.out.println("Pontuação do dealer: " + dealer.calcularPontuacao());
+            System.out.println("\nPontuação do dealer: " + dealer.calcularPontuacao());
+            System.out.println("Pontuação do jogador: " + jogador.calcularPontuacao() +"\n");
 
             int pontuacaoJogador = jogador.calcularPontuacao();
             int pontuacaoDealer = dealer.calcularPontuacao();

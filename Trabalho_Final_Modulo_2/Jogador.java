@@ -15,7 +15,7 @@ public class Jogador {
     }
 
     public String mostrarMao() {
-        return "Mão de " + nome + ": " + mao.toString();
+        return "Mão do " + nome + ": " + mao.toString();
     }
 
     public int calcularPontuacao() {
