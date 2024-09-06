@@ -10,12 +10,15 @@ public class Cassino {
     public static final String ANSI_BLUE = "\u001B[34m";
 
     public static void exibirLogoCassino() {
-        System.out.println(ANSI_RED +   "   _______   " + ANSI_GREEN +   "______   " + ANSI_YELLOW +   "______   " + ANSI_BLUE +   "______   ");
-        System.out.println(ANSI_RED +   "  |A      | " + ANSI_GREEN +   "|K     | " + ANSI_YELLOW +   "|Q     | " + ANSI_BLUE +   "|J     |  ");
-        System.out.println(ANSI_RED +   "  |       | " + ANSI_GREEN +   "|      | " + ANSI_YELLOW +   "|      | " + ANSI_BLUE +   "|      |  ");
-        System.out.println(ANSI_RED +   "  |      A| " + ANSI_GREEN +   "|     K| " + ANSI_YELLOW +   "|     Q| " + ANSI_BLUE +   "|     J|  ");
-        System.out.println(ANSI_RED +   "  |_______| " + ANSI_GREEN +   "|______| " + ANSI_YELLOW +   "|______| " + ANSI_BLUE +   "|______|  ");
-        System.out.println(ANSI_YELLOW + "   Bem-vindo ao Cassino Virtual Santander Coders 2024!" + ANSI_RESET);
+        System.out.println("╔══════════════════════════════════════════════════════╗");
+        System.out.println("║" + ANSI_RED +   "          _______   " + ANSI_GREEN +   "______   " + ANSI_YELLOW +   "______   " + ANSI_BLUE +   "______   " + ANSI_RESET + "       ║");
+        System.out.println("║" + ANSI_RED +   "         |A      | " + ANSI_GREEN +   "|K     | " + ANSI_YELLOW +   "|Q     | " + ANSI_BLUE +   "|J     |  " + ANSI_RESET + "       ║");
+        System.out.println("║" + ANSI_RED +   "         |       | " + ANSI_GREEN +   "|      | " + ANSI_YELLOW +   "|      | " + ANSI_BLUE +   "|      |  " + ANSI_RESET + "       ║");
+        System.out.println("║" + ANSI_RED +   "         |      A| " + ANSI_GREEN +   "|     K| " + ANSI_YELLOW +   "|     Q| " + ANSI_BLUE +   "|     J|  " + ANSI_RESET + "       ║");
+        System.out.println("║" + ANSI_RED +   "         |_______| " + ANSI_GREEN +   "|______| " + ANSI_YELLOW +   "|______| " + ANSI_BLUE +   "|______|  " + ANSI_RESET + "       ║");
+        System.out.println("║                                                      ║");
+        System.out.println("║" + ANSI_YELLOW + " Bem-vindo ao Cassino Virtual Santander Coders 2024!" + ANSI_RESET + "  ║");
+        System.out.println("╚══════════════════════════════════════════════════════╝");
         System.out.println();
     }
 

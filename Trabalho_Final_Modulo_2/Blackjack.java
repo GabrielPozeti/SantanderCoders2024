@@ -21,7 +21,7 @@ public class Blackjack {
             scanner.nextLine();
 
             if (valorAposta > usuario.getSaldo()) {
-                System.out.println("Saldo insuficiente para realizar essa aposta.");
+                System.out.println("Saldo insuficiente para realizar essa aposta, considere fazer um empréstimo.");
                 return;
             }
 
@@ -85,6 +85,10 @@ public class Blackjack {
 
             switch (opcao) {
                 case 1:
+                    if (usuario.getSaldo() == 0){
+                        System.out.println("Saldo insuficiente para realizar apostas, considere fazer um empréstimo.");
+                        jogarNovamente = false;
+                    }
                     break;
                 case 2:
                     jogarNovamente = false;

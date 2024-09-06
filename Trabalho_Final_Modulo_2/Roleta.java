@@ -60,10 +60,10 @@ public class Roleta {
             if (numeroApostado == numeroSorteado && corApostada.equalsIgnoreCase(corSorteada)) {
                 double ganho = valorAposta * 20;
                 usuario.setSaldo(usuario.getSaldo() + ganho);
-                System.out.println("Parabéns! Você ganhou R$ " + ganho + "! Seu novo saldo é: R$ " + usuario.getSaldo());
+                System.out.println("Parabéns! Você ganhou R$ " + ganho + "! Seu novo saldo é de: R$ " + usuario.getSaldo());
             } else {
                 usuario.setSaldo(usuario.getSaldo() - valorAposta);
-                System.out.println("Que pena! Você perdeu. Seu novo saldo é: R$ " + usuario.getSaldo());
+                System.out.println("Que pena! Você perdeu. Seu novo saldo é de: R$ " + usuario.getSaldo());
             }
 
             System.out.println("\nEscolha uma opção:");
@@ -75,7 +75,11 @@ public class Roleta {
 
             switch (opcao) {
                 case 1:
-                    break;
+                    if (usuario.getSaldo() == 0) {
+                        System.out.println("Saldo insuficiente para realizar apostas, considere fazer um empréstimo.");
+                        jogarNovamente = false;
+                    }
+                        break;
                 case 2:
                     jogarNovamente = false;
                     break;
