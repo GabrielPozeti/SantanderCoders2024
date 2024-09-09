@@ -86,7 +86,7 @@ public class Cassino {
                         Santander.emprestimoSantander(usuario);
                         break;
                     case 0:
-                        System.out.println("Obrigado por jogar no Cassino Virtual!");
+                        System.out.println("\nObrigado por jogar no Cassino Virtual!");
                         System.exit(0);
                         break;
                     default:
