@@ -89,6 +89,7 @@ public class Cassino {
                     case 0:
                         continuar = false;
                         System.out.println("Obrigado por jogar no Cassino Virtual!");
+                        System.exit(0);
                         break;
                     default:
                         System.out.println("Opção inválida.");
@@ -102,7 +103,7 @@ public class Cassino {
             System.out.print("Escolha uma opção: ");
             try {
                 int escolha = scanner.nextInt();
-                scanner.nextLine(); 
+                scanner.nextLine();
                 return escolha;
             } catch (InputMismatchException e) {
                 System.out.println("Entrada inválida. Por favor, insira um número.");
