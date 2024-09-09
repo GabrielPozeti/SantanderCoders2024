@@ -58,8 +58,7 @@ public class Cassino {
 
     private static void menuPrincipal(Usuario usuario) {
         try (Scanner scanner = new Scanner(System.in)) {
-            boolean continuar = true;
-            while (continuar) {
+            while (true) {
                 System.out.println("\nEscolha o jogo que deseja jogar:\n");
                 System.out.println("1. Blackjack");
                 System.out.println("2. Roleta");
@@ -87,7 +86,6 @@ public class Cassino {
                         Santander.emprestimoSantander(usuario);
                         break;
                     case 0:
-                        continuar = false;
                         System.out.println("Obrigado por jogar no Cassino Virtual!");
                         System.exit(0);
                         break;
