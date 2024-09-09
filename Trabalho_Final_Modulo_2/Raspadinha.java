@@ -44,7 +44,7 @@ public class Raspadinha {
                 opcoes[j] = temp;
             }
 
-            System.out.println("Escolha uma das 20 opções:");
+            System.out.println("\nEscolha uma das 20 opções:");
             for (int i = 0; i < 20; i++) {
                 System.out.printf("%-15s", "Opção " + (i + 1));
                 if ((i + 1) % 4 == 0) {

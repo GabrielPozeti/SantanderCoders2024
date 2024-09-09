@@ -26,6 +26,7 @@ public class Roleta {
                 try {
                     System.out.print("Aposte em um número de 0 a 36: ");
                     numeroApostado = scanner.nextInt();
+                    scanner.nextLine();
                     if (numeroApostado < 0 || numeroApostado > 36) {
                         System.out.println("Numero Inválido, por favor digite apenas números entre 0 e 36.");
                     }
