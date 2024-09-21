@@ -1,6 +1,13 @@
 public class ClientePF extends Clientes {
-    public ClientePF(String nome, String documento) {
-        super(nome, documento);
+    private int idade;
+
+    public ClientePF(String nome, String documento, String endereco, int telefone, int idade) {
+        super(nome, documento, endereco, telefone);
+        this.idade = idade;
+    }
+
+    public int getIdade() {
+        return idade;
     }
 
     @Override

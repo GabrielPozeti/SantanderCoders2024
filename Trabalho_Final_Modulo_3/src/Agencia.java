@@ -1,17 +1,17 @@
 public class Agencia {
     private String nome;
-    private String logradouro;
+    private String cidade;
 
-    public Agencia(String nome, String logradouro) {
+    public Agencia(String nome, String cidade) {
         this.nome = nome;
-        this.logradouro = logradouro;
+        this.cidade = cidade;
     }
 
     public String getNome() {
         return nome;
     }
 
-    public String getLogradouro() {
-        return logradouro;
+    public String getCidade() {
+        return cidade;
     }
 }
