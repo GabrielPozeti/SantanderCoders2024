@@ -1,8 +1,8 @@
 public class ClientePF extends Clientes {
     private int idade;
 
-    public ClientePF(String nome, String documento, String endereco, int telefone, int idade) {
-        super(nome, documento, endereco, telefone);
+    public ClientePF(String nome, String cnh, String endereco, int telefone, int idade) {
+        super(nome, cnh, endereco, telefone);
         this.idade = idade;
     }
 

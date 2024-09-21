@@ -1,13 +1,13 @@
 public class ClientePJ extends Clientes {
     private String nomeDoResponsavel;
-    private String documentoDoResponsavel;
+    private String cnhDoResponsavel;
     private int idadeDoResponsavel;
     private String funcaoDoResponsavel;
 
-    public ClientePJ(String nomeDaEmpresa, String cnpj, String endereco, int telefone, String nomeDoResponsavel, String documentoDoResponsavel, int idadeDoResponsavel, String funcaoDoResponsavel) {
+    public ClientePJ(String nomeDaEmpresa, String cnpj, String endereco, int telefone, String nomeDoResponsavel, String cnhDoResponsavel, int idadeDoResponsavel, String funcaoDoResponsavel) {
         super(nomeDaEmpresa, cnpj, endereco, telefone);
         this.nomeDoResponsavel = nomeDoResponsavel;
-        this.documentoDoResponsavel = documentoDoResponsavel;
+        this.cnhDoResponsavel = cnhDoResponsavel;
         this.idadeDoResponsavel = idadeDoResponsavel;
         this.funcaoDoResponsavel = funcaoDoResponsavel;
     }
@@ -16,8 +16,8 @@ public class ClientePJ extends Clientes {
         return nomeDoResponsavel;
     }
 
-    public String getDocumentoDoResponsavel() {
-        return documentoDoResponsavel;
+    public String getCnhDoResponsavel() {
+        return cnhDoResponsavel;
     }
 
     public int getIdadeDoResponsavel() {
