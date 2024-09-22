@@ -1,4 +1,4 @@
-public abstract class Veiculo {
+public abstract class Veiculo implements Locar {
     private String placa;
     private String modelo;
     private String cor;
@@ -31,4 +31,22 @@ public abstract class Veiculo {
     }
 
    public abstract double getValorDiaria();
+
+    public void alugar() {
+    if (alugado) {
+        alugado = true;
+        System.out.println(modelo + " está alugado.");
+    } else {
+        System.out.println(modelo + " está disponível.");
+    }
+    }
+
+    public void devolver() {
+        if (!alugado) {
+            alugado = false;
+            System.out.println(modelo + " foi devolvido.");
+        } else {
+            System.out.println(modelo + " está disponível.");
+        }
+    }
 }

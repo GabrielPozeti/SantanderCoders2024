@@ -1,3 +1,4 @@
 public interface Locar {
-    //logica de locacao
+    public void alugar();
+    public void devolver();
 }

@@ -1,4 +1,4 @@
-public class ClientePF extends Clientes {
+public class ClientePF extends Cliente {
     private int idade;
 
     public ClientePF(String nome, String cnh, String endereco, int telefone, int idade) {

@@ -1,10 +1,10 @@
-public abstract class Clientes {
+public abstract class Cliente {
     private String nome;
     private String documento;
     private String endereco;
     private int telefone;
 
-    public Clientes(String nome, String documento, String endereco, int telefone) {
+    public Cliente(String nome, String documento, String endereco, int telefone) {
         this.nome = nome;
         this.documento = documento;
         this.endereco = endereco;
