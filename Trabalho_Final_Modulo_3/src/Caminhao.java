@@ -1,4 +1,4 @@
-public class Caminhao extends Veiculo implements Locar {
+public class Caminhao extends Veiculo {
     public Caminhao(String placa, String modelo, String cor) {
         super(placa, modelo, cor);
     }
