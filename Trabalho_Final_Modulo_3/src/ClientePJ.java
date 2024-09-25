@@ -2,15 +2,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class ClientePJ extends Cliente {
-    private String nomeDoResponsavel;
-    private String cnhDoResponsavel;
-    private int idadeDoResponsavel;
-    private String funcaoDoResponsavel;
+public class ClientePJ extends Cliente<String> {
+    private final String nomeDoResponsavel;
+    private final String cnhDoResponsavel;
+    private final int idadeDoResponsavel;
+    private final String funcaoDoResponsavel;
 
-    public ClientePJ(String nomeDaEmpresa, String cnpj, String endereco, int telefone, String senha,
-                     String nomeDoResponsavel, String cnhDoResponsavel, int idadeDoResponsavel, String funcaoDoResponsavel) {
-        super(nomeDaEmpresa, cnpj, endereco, senha, telefone);
+    public ClientePJ(String nomeDaEmpresa, String cnpj, String endereco, int telefone,                     String nomeDoResponsavel, String cnhDoResponsavel, int idadeDoResponsavel, String funcaoDoResponsavel) {
+        super(nomeDaEmpresa, cnpj, endereco, telefone);
         this.nomeDoResponsavel = nomeDoResponsavel;
         this.cnhDoResponsavel = cnhDoResponsavel;
         this.idadeDoResponsavel = idadeDoResponsavel;
@@ -45,7 +44,7 @@ public class ClientePJ extends Cliente {
 
     @Override
     public double calcularDescontoDias(int diasAlugados) {
-        return diasAlugados > 7 ? 0.1 : 0.0;  // Exemplo: 10% de desconto para mais de 7 dias
+        return diasAlugados > 7 ? 0.1 : 0.0;
     }
 
     public static void realizarCadastro() {
@@ -72,9 +71,6 @@ public class ClientePJ extends Cliente {
         int telefone = input.nextInt();
         input.nextLine();
 
-        System.out.print("Digite sua senha: ");
-        String senha = input.nextLine();
-
         System.out.print("Digite o nome do responsável: ");
         String nomeDoResponsavel = input.nextLine();
 
@@ -85,16 +81,11 @@ public class ClientePJ extends Cliente {
         int idadeDoResponsavel = input.nextInt();
         input.nextLine();
 
-        if (idadeDoResponsavel < 18) {
-            System.out.println("Desculpe, apenas responsáveis maiores de 18 anos podem se cadastrar.\n");
-            return;
-        }
-
         System.out.print("Função do Responsável: ");
         String funcaoDoResponsavel = input.nextLine();
 
 
-        ClientePJ novoCliente = new ClientePJ(nomeDaEmpresa, cnpj, endereco, telefone, senha,nomeDoResponsavel, cnhDoResponsavel, idadeDoResponsavel, funcaoDoResponsavel);
+        ClientePJ novoCliente = new ClientePJ(nomeDaEmpresa, cnpj, endereco, telefone ,nomeDoResponsavel, cnhDoResponsavel, idadeDoResponsavel, funcaoDoResponsavel);
         listaDeClientesPJ.add(novoCliente);
         System.out.println("Cadastro realizado com sucesso!\n");
     }

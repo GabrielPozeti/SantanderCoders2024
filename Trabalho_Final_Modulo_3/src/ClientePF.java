@@ -2,12 +2,22 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class ClientePF extends Cliente {
-    private int idade;
+public class ClientePF extends Cliente<String> {
+    private final int idade;
+    private final String cnh;
 
-    public ClientePF(String nome, String documento, String endereco, int telefone, String senha, int idade) {
-        super(nome, documento, endereco, senha, telefone);
+    public ClientePF(String nome, String documento, String endereco, int telefone, int idade, String cnh) {
+        super(nome, documento, endereco, telefone);
         this.idade = idade;
+        this.cnh = cnh;
+    }
+
+    public int getIdade() {
+        return idade;
+    }
+
+    public String getCnh() {
+        return cnh;
     }
 
     private static List<ClientePF> listaDeClientesPF = new ArrayList<>();
@@ -18,10 +28,6 @@ public class ClientePF extends Cliente {
 
     public static void setListaDeClientesPF(List<ClientePF> listaDeClientesPF) {
         ClientePF.listaDeClientesPF = listaDeClientesPF;
-    }
-
-    public int getIdade() {
-        return idade;
     }
 
     @Override
@@ -39,20 +45,16 @@ public class ClientePF extends Cliente {
         System.out.print("Digite o seu nome: ");
         String nome = input.nextLine();
 
-        System.out.print("Digite o numero do seu documento (CNH ou CPF): ");
+        System.out.print("Digite o seu CPF ou RG: ");
         String documento = input.nextLine();
 
-        System.out.print("Digite a sua senha: ");
-        String senha = input.nextLine();
+        System.out.print("Digite o número da sua CNH: ");
+        String cnh = input.nextLine();
 
         System.out.print("Digite a sua idade: ");
         int idade = input.nextInt();
         input.nextLine();
 
-        if (idade < 18) {
-            System.out.println("Desculpe, apenas maiores de 18 anos podem se cadastrar.\n");
-            return;
-        }
 
         for (ClientePF cliente : listaDeClientesPF) {
             if (cliente.getNome().equals(nome)) {
@@ -68,7 +70,7 @@ public class ClientePF extends Cliente {
         int telefone = input.nextInt();
         input.nextLine();
 
-        ClientePF novoCliente = new ClientePF(nome, documento, endereco, telefone, senha, idade);
+        ClientePF novoCliente = new ClientePF(nome, documento, endereco, telefone, idade, cnh);
         listaDeClientesPF.add(novoCliente);
         System.out.println("Cadastro realizado com sucesso!\n");
     }

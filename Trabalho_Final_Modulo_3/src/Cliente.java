@@ -1,15 +1,13 @@
-public abstract class Cliente {
+public abstract class Cliente<T> {
     private String nome;
-    private String documento;
+    private T documento;
     private String endereco;
-    private String senha;
     private int telefone;
 
-    public Cliente(String nome, String documento, String endereco, String senha, int telefone) {
+    public Cliente(String nome, T documento, String endereco, int telefone) {
         this.nome = nome;
         this.documento = documento;
         this.endereco = endereco;
-        this.senha = senha;
         this.telefone = telefone;
     }
 
@@ -17,16 +15,12 @@ public abstract class Cliente {
         return nome;
     }
 
-    public String getDocumento() {
+    public T getDocumento() {
         return documento;
     }
 
     public String getEndereco() {
         return endereco;
-    }
-
-    public String getSenha() {
-        return senha;
     }
 
     public int getTelefone() {
