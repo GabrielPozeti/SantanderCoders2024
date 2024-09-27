@@ -47,7 +47,7 @@ public class ClientePJ extends Cliente<String> {
         return diasAlugados > 7 ? 0.1 : 0.0;
     }
 
-    public static void realizarCadastro() {
+    public static void realizarCadastro(Sistema sistema) {
         Scanner input = new Scanner(System.in);
 
         System.out.println("Cadastro de nova Pessoa Jurídica:");

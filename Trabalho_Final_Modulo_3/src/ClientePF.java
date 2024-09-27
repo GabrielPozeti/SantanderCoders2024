@@ -38,7 +38,7 @@ public class ClientePF extends Cliente<String> {
         return 0;
     }
 
-    public static void realizarCadastro() {
+    public static void realizarCadastro(Sistema sistema) {
         Scanner input = new Scanner(System.in);
 
         System.out.println("Cadastro de nova Pessoa Física:");

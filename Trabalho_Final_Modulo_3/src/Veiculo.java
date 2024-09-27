@@ -1,10 +1,10 @@
 public abstract class Veiculo implements Locar {
-    private String placa;
     private String modelo;
+    private String placa;
     private String cor;
     private boolean alugado;
 
-    public Veiculo(String placa, String modelo, String cor) {
+    public Veiculo(String modelo, String placa, String cor) {
         this.placa = placa;
         this.modelo = modelo;
         this.cor = cor;
@@ -60,5 +60,9 @@ public abstract class Veiculo implements Locar {
         } else {
             System.out.println(modelo + " está disponível.");
         }
+    }
+
+    public String toString() {
+        return "Veículo -> Modelo: " + modelo + " | Placa: " + placa + " | Cor: " + cor + ". " + alugado;
     }
 }
