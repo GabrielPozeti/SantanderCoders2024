@@ -14,6 +14,18 @@ public abstract class Veiculo implements Locar {
         return placa;
     }
 
+    public void setPlaca(String placa) {
+        this.placa = placa;
+    }
+
+    public void setModelo(String modelo) {
+        this.modelo = modelo;
+    }
+
+    public void setCor(String cor) {
+        this.cor = cor;
+    }
+
     public String getModelo() {
         return modelo;
     }

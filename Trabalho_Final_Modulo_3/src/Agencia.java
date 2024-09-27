@@ -14,4 +14,17 @@ public class Agencia {
     public String getCidade() {
         return cidade;
     }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public void setCidade(String cidade) {
+        this.cidade = cidade;
+    }
+
+    @Override
+    public String toString() {
+        return "Agência: " + nome + " | Cidade: " + cidade;
+    }
 }
