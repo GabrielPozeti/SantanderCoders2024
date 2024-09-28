@@ -6,6 +6,15 @@ public class LocadoraSantander {
     private Agencia agencia;
     private LocalDateTime aluguelData;
     private LocalDateTime devolucaoData;
+    private double valorTotal;
+
+    public double getValorTotal() {
+        return valorTotal;
+    }
+
+    public void setValorTotal(double valorTotal) {
+        this.valorTotal = valorTotal;
+    }
 
     public Veiculo getVeiculo() {
         return veiculo;
@@ -45,6 +54,7 @@ public class LocadoraSantander {
 
     public void setDevolucaoData(LocalDateTime devolucaoData) {
         this.devolucaoData = devolucaoData;
+        this.valorTotal = calcularValorTotal();
     }
 
     public LocadoraSantander(Veiculo veiculo, Cliente cliente, Agencia agencia, LocalDateTime aluguelData) {
@@ -61,7 +71,7 @@ public class LocadoraSantander {
         veiculo.setAlugado(false);
     }
 
-    public double verificarValorTotal() {
+    public double calcularValorTotal() {
         long diasAlugados = java.time.Duration.between(aluguelData, devolucaoData).toDays();
         double valorBase = veiculo.getValorDiaria() * diasAlugados;
         double desconto = cliente.calcularDescontoDias((int) diasAlugados);

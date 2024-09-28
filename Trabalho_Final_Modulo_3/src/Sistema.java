@@ -174,7 +174,20 @@ public class Sistema {
             LocadoraSantander aluguel = new LocadoraSantander(veiculo, cliente, agencia, LocalDateTime.now());
             alugueis.add(aluguel);
             veiculo.setAlugado(true);
-            System.out.println("Veículo alugado com sucesso!");
+
+            System.out.println("""
+                    Veículo alugado com sucesso!
+                    
+                    ***Comprovante:***""");
+            System.out.println("Dados do Cliente: ");
+            System.out.println("Nome: " + aluguel.getCliente().getNome());
+            System.out.println("Documento: " + aluguel.getCliente().getDocumento() + "\n");
+            System.out.println("Dados do Veículo: ");
+            System.out.println("Modelo: " + aluguel.getVeiculo().getModelo());
+            System.out.println("Placa: " + aluguel.getVeiculo().getPlaca());
+            System.out.println("Cor: " + aluguel.getVeiculo().getCor() + "\n");
+            System.out.println("Alugado na Agência: " + aluguel.getAgencia().getNome() + ", na cidade de " + aluguel.getAgencia().getCidade() + "\n");
+            System.out.println("Data do Aluguel: " + aluguel.getAluguelData());
 
         } else {
             System.out.println("O veículo não está disponível para aluguel no momento.");
@@ -194,7 +207,20 @@ public class Sistema {
         }
         if (aluguelEncontrado != null) {
             aluguelEncontrado.entregarVeiculo(LocalDateTime.now(), buscarAgenciaPorCidade(cidadeAgencia));
-            System.out.println("Veículo entregue com sucesso!");
+            System.out.println("""
+                    Veículo entregue com sucesso!
+                    
+                    ***Comprovante:***""");
+            System.out.println("Dados do Cliente: ");
+            System.out.println("Nome: " + aluguelEncontrado.getCliente().getNome());
+            System.out.println("Documento: " + aluguelEncontrado.getCliente().getDocumento() + "\n");
+            System.out.println("Dados do Veículo: ");
+            System.out.println("Modelo: " + aluguelEncontrado.getVeiculo().getModelo());
+            System.out.println("Placa: " + aluguelEncontrado.getVeiculo().getPlaca());
+            System.out.println("Cor: " + aluguelEncontrado.getVeiculo().getCor() + "\n");
+            System.out.println("Entregue na Agência: " + aluguelEncontrado.getAgencia().getNome()+ ", na cidade de " + aluguelEncontrado.getAgencia().getCidade() + "\n");
+            System.out.println("Data da Entrega: " + aluguelEncontrado.getAluguelData());
+            System.out.println("Valor pago: R$" + aluguelEncontrado.getValorTotal());
 
         }
         else {
