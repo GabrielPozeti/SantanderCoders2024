@@ -17,20 +17,20 @@ public class Main {
             System.out.println("║  ... ... ... ..  ...... ..." + ANSI_RED + "****" + ANSI_RESET + ".... ... ......  .. ....║");
             System.out.println("║ ...... ... .......... ... " + ANSI_RED + "+*****: " + ANSI_RESET + "... ... .......... . ║");
             System.out.println("║  ... ... ... ..  ......::*" + ANSI_RED + "****=" + ANSI_RESET + " ... ......  .. ....... ║");
-            System.out.println("║ ...... ... ..........." + ANSI_RED + "+*" + ANSI_RESET +"..." + ANSI_RED + ".:******:." + ANSI_RESET + " ... ..........  .║");
+            System.out.println("║ ...... ... ..........." + ANSI_RED + "+*" + ANSI_RESET + "..." + ANSI_RED + ".:******:." + ANSI_RESET + " ... ..........  .║");
             System.out.println("║  ... ... ... ..  ...." + ANSI_RED + "-**-" + ANSI_RESET + "..." + ANSI_RED + ":******-.." + ANSI_RESET + "......  .... ... ║");
             System.out.println("║ ...... ... .......... " + ANSI_RED + "+***." + ANSI_RESET + "...." + ANSI_RED + ".+*****=" + ANSI_RESET + "... .......... .║");
             System.out.println("║  ... ... ... ..  ...." + ANSI_RED + "-****:" + ANSI_RESET + "....." + ANSI_RED + "-*****=" + ANSI_RESET + ".......  .. ... ║");
-            System.out.println("║ ...... ... ..........." + ANSI_RED + "*****=." + ANSI_RESET +  "...." + ANSI_RED + "*****" + ANSI_RESET + ".. ..........  ..║");
+            System.out.println("║ ...... ... ..........." + ANSI_RED + "*****=." + ANSI_RESET + "...." + ANSI_RED + "*****" + ANSI_RESET + ".. ..........  ..║");
             System.out.println("║  ... ... ... ..  ......" + ANSI_RED + "+*****:" + ANSI_RESET + " ..." + ANSI_RED + "+***:" + ANSI_RESET + "......  .. .....║");
-            System.out.println("║ ..............." + ANSI_RED + "=**+" + ANSI_RESET + "....." + ANSI_RED +  "=*****+" + ANSI_RESET + "...." + ANSI_RED + ":*****=:" + ANSI_RESET + ".......... .║");
-            System.out.println("║  ... ... " + ANSI_RED + ".:*********" + ANSI_RESET + "... " + ANSI_RED + ".:******:" + ANSI_RESET +".. " + ANSI_RED + "+*********-... " + ANSI_RESET + "....║");
-            System.out.println("║ ......." + ANSI_RED + ":*************:" + ANSI_RESET + "... " + ANSI_RED + ".+*****:" + ANSI_RESET +".." + ANSI_RED + "*************=.." + ANSI_RESET +  " ..║");
-            System.out.println("║  ...." + ANSI_RED + "-****************=" + ANSI_RESET + "...." + ANSI_RED +  "+=*****." + ANSI_RESET + ":" + ANSI_RED + "***************+:" + ANSI_RESET + "..║");
+            System.out.println("║ ..............." + ANSI_RED + "=**+" + ANSI_RESET + "....." + ANSI_RED + "=*****+" + ANSI_RESET + "...." + ANSI_RED + ":*****=:" + ANSI_RESET + ".......... .║");
+            System.out.println("║  ... ... " + ANSI_RED + ".:*********" + ANSI_RESET + "... " + ANSI_RED + ".:******:" + ANSI_RESET + ".. " + ANSI_RED + "+*********-... " + ANSI_RESET + "....║");
+            System.out.println("║ ......." + ANSI_RED + ":*************:" + ANSI_RESET + "... " + ANSI_RED + ".+*****:" + ANSI_RESET + ".." + ANSI_RED + "*************=.." + ANSI_RESET + " ..║");
+            System.out.println("║  ...." + ANSI_RED + "-****************=" + ANSI_RESET + "...." + ANSI_RED + "+=*****." + ANSI_RESET + ":" + ANSI_RED + "***************+:" + ANSI_RESET + "..║");
             System.out.println("║ ...." + ANSI_RED + "+*******************" + ANSI_RESET + "....." + ANSI_RED + "=****+******************" + ANSI_RESET + "..║");
-            System.out.println("║ ..." + ANSI_RED + "*********************:. " + ANSI_RESET + ".." + ANSI_RED +"+***********************" + ANSI_RESET +"..║");
+            System.out.println("║ ..." + ANSI_RED + "*********************:. " + ANSI_RESET + ".." + ANSI_RED + "+***********************" + ANSI_RESET + "..║");
             System.out.println("║ ..." + ANSI_RED + "=**********************=" + ANSI_RESET + ".. " + ANSI_RED + "+**********************" + ANSI_RESET + "..║");
-            System.out.println("║ ..." + ANSI_RED + ":***********************+" + ANSI_RESET +".." + ANSI_RED + "+**********************" + ANSI_RESET + "..║");
+            System.out.println("║ ..." + ANSI_RED + ":***********************+" + ANSI_RESET + ".." + ANSI_RED + "+**********************" + ANSI_RESET + "..║");
             System.out.println("║ ...." + ANSI_RED + ":***********************-+**********************+" + ANSI_RESET + "..║");
             System.out.println("║ ......" + ANSI_RED + "=********************************************:" + ANSI_RESET + ".. ║");
             System.out.println("║ ........" + ANSI_RED + ":+**************************************=" + ANSI_RESET + "..... ║");
@@ -54,24 +54,38 @@ public class Main {
             input.nextLine();
 
             switch (escolha) {
-                case 1: cadastrarCliente();
+                case 1:
+                    cadastrarCliente();
+                    break;
+                case 2:
+                    buscarCliente();
+                    break;
+                case 3:
+                    sistema.listarClientes();
+                    break;
+                case 4:
+                    cadastrarVeiculo();
+                    break;
+                case 5:
+                    alterarVeiculo();
+                    break;
+                case 6:
+                    buscarVeiculo();
+                    break;
+                case 7:
+                    listarVeiculos();
+                    break;
+                case 8:
+                    cadastrarAgencia();
+                    break;
+                case 9:alterarAgencia();
                 break;
-                case 2: buscarCliente();
-                break;
-                case 3: sistema.listarClientes();
-                break;
-                case 4: cadastrarVeiculo();
-                break;
-                case 5: alterarVeiculo();
-                break;
-                case 6: buscarVeiculo();
-                break;
-                case 7: listarVeiculos();
-                break;
-                case 0: System.exit(0);
-                break;
-                default: System.out.println("Escolha inválida, por favor digite uma opção válida");
-                break;
+                case 0:
+                    System.exit(0);
+                    break;
+                default:
+                    System.out.println("Escolha inválida, por favor digite uma opção válida");
+                    break;
             }
         }
     }
@@ -81,28 +95,28 @@ public class Main {
         System.out.println("""
                 Menu Aluguel de Veículos:
                 (Digite o número da opção desejada)
-                
+                                
                 Clientes:
                 1- Cadastrar novo cliente
                 2- Buscar cliente
                 3- Verificar lista de clientes
-                
+                                
                 Veículos:
                 4- Cadastrar novo veículo
                 5- Alterar veículo cadastrado
                 6- Buscar veículo
                 7- Verificar lista de veículos
-                
+                                
                 Agência:
                 8- Cadastrar nova agência
                 9- Alterar agência cadastrada
                 10- Verificar lista de agências
-                
+                                
                 Locação:
                 11- Alugar veículo
                 12- Devolver veículo
                 13- Verificar lista de veículos alugados
-                
+                                
                 0- Sair""");
 
     }
@@ -116,7 +130,7 @@ public class Main {
             System.out.println("""
                     Cadastro de Cliente:
                     (Digite o número da opção desejada)
-                    
+                                        
                     1- Cadastrar nova Pessoa Física
                     2- Cadastrar nova Pessoa Jurídica
                     0- Retornar ao menu inicial""");
@@ -124,19 +138,22 @@ public class Main {
             input.nextLine();
 
             switch (escolha) {
-                case 1: ClientePF.realizarCadastro(sistema);
-                continuar = false;
-                break;
+                case 1:
+                    ClientePF.realizarCadastro(sistema);
+                    continuar = false;
+                    break;
 
-                case 2 : ClientePJ.realizarCadastro(sistema);
-                continuar = false;
-                break;
+                case 2:
+                    ClientePJ.realizarCadastro(sistema);
+                    continuar = false;
+                    break;
                 case 0:
                     System.out.println("Retornando ao menu inicial...");
                     continuar = false;
                     break;
 
-                default: System.out.println("Escolha inválida, por favor digite uma opção válida.");
+                default:
+                    System.out.println("Escolha inválida, por favor digite uma opção válida.");
             }
         }
     }
@@ -149,8 +166,7 @@ public class Main {
         Cliente buscaCliente = sistema.buscarClientePorDocumento(documento);
         if (buscaCliente != null) {
             System.out.println("Cliente encontrado no sistema!");
-        }
-        else {
+        } else {
             System.out.println("Cliente não encontrado no sistema.");
         }
     }
@@ -180,15 +196,17 @@ public class Main {
 
         Veiculo veiculo = null;
         switch (tipoVeiculo) {
-            case 1: veiculo = new Carro(modelo, placa, cor);
-            case 2: veiculo = new Moto(modelo, placa, cor);
-            case 3: veiculo = new Caminhao(modelo, placa, cor);
+            case 1:
+                veiculo = new Carro(modelo, placa, cor);
+            case 2:
+                veiculo = new Moto(modelo, placa, cor);
+            case 3:
+                veiculo = new Caminhao(modelo, placa, cor);
+                sistema.cadastrarVeiculo(veiculo);
             default:
                 System.out.println("Escolha inválida, veículo não cadastrado.");
                 return;
         }
-        // sistema.cadastrarVeiculo(veiculo);
-        // ADICIONAR CADASTRO DE VEICULO DO SISTEMA
     }
 
 
@@ -218,8 +236,7 @@ public class Main {
         Veiculo veiculo = sistema.buscarVeiculoPorModelo(parteDoNome);
         if (veiculo != null) {
             System.out.println(veiculo);
-        }
-        else {
+        } else {
             System.out.println("Veículo não encontrado no sistema.");
         }
     }
@@ -232,5 +249,34 @@ public class Main {
 
     //AGÊNCIA
 
+    public static void cadastrarAgencia() {
+        System.out.println("Nome da Agência: ");
+        String nome = input.nextLine();
 
+        System.out.println("Cidade da Agência: ");
+        String cidade = input.nextLine();
+
+        Agencia agencia = new Agencia(nome, cidade);
+        sistema.cadastrarAgencia(agencia);
+    }
+
+
+    public static void alterarAgencia() {
+        System.out.println("Digite a cidade da agência que deseja alterar");
+        String cidade = input.nextLine();
+
+        Agencia agencia = sistema.buscarAgenciaPorCidade(cidade);
+        if (agencia == null) {
+            System.out.println("Agência não encontrada no sistema.");
+        return;
+        }
+
+        System.out.println("Nome atual: " + agencia.getNome() + "\nNovo Nome: ");
+        String novoNome = input.nextLine();
+
+        System.out.println("Cidade atual: " + agencia.getCidade() + "\nNova Cidade: ");
+        String novaCidade = input.nextLine();
+
+        sistema.alterarAgencia(novoNome, cidade,novaCidade);
+    }
 }
