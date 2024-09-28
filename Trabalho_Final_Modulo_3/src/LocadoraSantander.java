@@ -7,6 +7,46 @@ public class LocadoraSantander {
     private LocalDateTime aluguelData;
     private LocalDateTime devolucaoData;
 
+    public Veiculo getVeiculo() {
+        return veiculo;
+    }
+
+    public void setVeiculo(Veiculo veiculo) {
+        this.veiculo = veiculo;
+    }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+
+    public Agencia getAgencia() {
+        return agencia;
+    }
+
+    public void setAgencia(Agencia agencia) {
+        this.agencia = agencia;
+    }
+
+    public LocalDateTime getAluguelData() {
+        return aluguelData;
+    }
+
+    public void setAluguelData(LocalDateTime aluguelData) {
+        this.aluguelData = aluguelData;
+    }
+
+    public LocalDateTime getDevolucaoData() {
+        return devolucaoData;
+    }
+
+    public void setDevolucaoData(LocalDateTime devolucaoData) {
+        this.devolucaoData = devolucaoData;
+    }
+
     public LocadoraSantander(Veiculo veiculo, Cliente cliente, Agencia agencia, LocalDateTime aluguelData) {
         this.veiculo = veiculo;
         this.cliente = cliente;
@@ -16,7 +56,7 @@ public class LocadoraSantander {
         veiculo.setAlugado(true);
     }
 
-    public void entregarVeiculo(LocalDateTime entregaData) {
+    public void entregarVeiculo(LocalDateTime entregaData, Agencia agencia) {
         this.devolucaoData = entregaData;
         veiculo.setAlugado(false);
     }

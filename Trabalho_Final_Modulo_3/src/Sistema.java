@@ -1,3 +1,4 @@
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -5,13 +6,13 @@ public class Sistema {
     List<Veiculo> veiculos;
     List<Cliente> clientes;
     List<Agencia> agencias;
-    List<LocadoraSantander> locadoraSantanders;
+    List<LocadoraSantander> alugueis;
 
     public Sistema() {
         veiculos = new ArrayList<>();
         clientes = new ArrayList<>();
         agencias = new ArrayList<>();
-        locadoraSantanders = new ArrayList<>();
+        alugueis = new ArrayList<>();
     }
 
     //VEÍCULOS
@@ -80,7 +81,7 @@ public class Sistema {
 
     public Agencia buscarAgenciaPorNome(String nome) {
         for (Agencia agencia : agencias) {
-            if (agencia.getNome().equals(nome)){
+            if (agencia.getNome().equals(nome)) {
                 return agencia;
             }
         }
@@ -146,10 +147,69 @@ public class Sistema {
     public void listarClientes() {
         if (clientes.isEmpty()) {
             System.out.println("Nenhum cliente cadastrado no sistema.");
-        }
-        else {
+        } else {
             for (Cliente c : clientes) {
                 System.out.println(c);
+            }
+        }
+    }
+
+    //LOCAÇÃO
+
+    public void alugarVeiculo(String documentoCliente, String modeloVeiculo, String cidadeAgencia) {
+        Cliente cliente = buscarClientePorDocumento(documentoCliente);
+        Veiculo veiculo = buscarVeiculoPorModelo(modeloVeiculo);
+        Agencia agencia = buscarAgenciaPorCidade(cidadeAgencia);
+
+        if (cliente == null) {
+            System.out.println("Cliente não encontrado no sistema.");
+        }
+        if (veiculo == null) {
+            System.out.println("Veículo não encontrado no sistema.");
+        }
+        if (agencia == null) {
+            System.out.println("Agência não encontrada no sistema.");
+        }
+        if (!veiculo.isAlugado()) {
+            LocadoraSantander aluguel = new LocadoraSantander(veiculo, cliente, agencia, LocalDateTime.now());
+            alugueis.add(aluguel);
+            veiculo.setAlugado(true);
+            System.out.println("Veículo alugado com sucesso!");
+
+        } else {
+            System.out.println("O veículo não está disponível para aluguel no momento.");
+        }
+    }
+
+
+    public void entregarVeiculo(String documentoCliente, String modeloVeiculo, String cidadeAgencia) {
+        LocadoraSantander aluguelEncontrado = null;
+        for (LocadoraSantander aluguel : alugueis) {
+            if (aluguel.getCliente().getDocumento().equals(documentoCliente) &&
+                    aluguel.getVeiculo().getModelo().equals(modeloVeiculo) &&
+                    aluguel.getDevolucaoData() == null) {
+                aluguelEncontrado = aluguel;
+                break;
+            }
+        }
+        if (aluguelEncontrado != null) {
+            aluguelEncontrado.entregarVeiculo(LocalDateTime.now(), buscarAgenciaPorCidade(cidadeAgencia));
+            System.out.println("Veículo entregue com sucesso!");
+
+        }
+        else {
+            System.out.println("Veículo não encontrado no sistema.");
+        }
+    }
+
+
+    public void listarLocacoes() {
+        if (alugueis.isEmpty()) {
+            System.out.println("Nenhum aluguel encontrado no sistema.");
+        }
+        else {
+            for (LocadoraSantander aluguel : alugueis) {
+                System.out.println(aluguel);
             }
         }
     }

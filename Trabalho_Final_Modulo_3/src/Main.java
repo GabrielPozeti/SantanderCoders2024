@@ -82,6 +82,12 @@ public class Main {
                 break;
                 case 10: listarAgencias();
                 break;
+                case 11: alugarVeiculo();
+                break;
+                case 12: entregarVeiculo();
+                break;
+                case 13: listarLocacoes();
+                break;
                 case 0:
                     System.exit(0);
                     break;
@@ -286,5 +292,36 @@ public class Main {
     public static void listarAgencias() {
         System.out.println("Lista de Agências: ");
         sistema.listarAgencias();
+    }
+
+    //LOCAÇÃO
+
+    public static void alugarVeiculo() {
+        System.out.println("Documento do cliente: ");
+        String documentoCliente = input.nextLine();
+        System.out.println("Modelo do veículo: ");
+        String modeloVeiculo = input.nextLine();
+        System.out.println("Cidade da agência de retirada: ");
+        String cidadeAgencia = input.nextLine();
+
+        sistema.alugarVeiculo(documentoCliente, modeloVeiculo, cidadeAgencia);
+    }
+
+
+    public static void entregarVeiculo() {
+        System.out.println("Documento do cliente: ");
+        String documentoCliente = input.nextLine();
+        System.out.println("Modelo do veículo: ");
+        String modeloVeiculo = input.nextLine();
+        System.out.println("Cidade da agência de devolução: ");
+        String cidadeAgencia = input.nextLine();
+
+        sistema.entregarVeiculo(documentoCliente, modeloVeiculo, cidadeAgencia);
+    }
+
+
+    public static void listarLocacoes() {
+        System.out.println("Lista de Locações: ");
+        sistema.listarLocacoes();
     }
 }
