@@ -28,7 +28,7 @@ public class Sistema {
     }
 
 
-    public Veiculo buscarVeiculoPorNome(String parteDoNome) {
+    public Veiculo buscarVeiculoPorModelo(String parteDoNome) {
         for (Veiculo veiculo : veiculos) {
             if (veiculo.getModelo().contains(parteDoNome)) {
                 return veiculo;
@@ -39,7 +39,7 @@ public class Sistema {
 
 
     public void alterarVeiculo(String NovaPlaca, String modelo, String NovaCor) {
-        Veiculo veiculo = buscarVeiculoPorNome(modelo);
+        Veiculo veiculo = buscarVeiculoPorModelo(modelo);
         if (veiculo != null) {
             veiculo.setPlaca(NovaPlaca);
             veiculo.setCor(NovaCor);

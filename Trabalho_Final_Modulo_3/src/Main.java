@@ -58,7 +58,15 @@ public class Main {
                 break;
                 case 2: buscarCliente();
                 break;
-                case 3: cadastrarVeiculo();
+                case 3: sistema.listarClientes();
+                break;
+                case 4: cadastrarVeiculo();
+                break;
+                case 5: alterarVeiculo();
+                break;
+                case 6: buscarVeiculo();
+                break;
+                case 7: listarVeiculos();
                 break;
                 case 0: System.exit(0);
                 break;
@@ -168,14 +176,55 @@ public class Main {
         int tipoVeiculo = input.nextInt();
         input.nextLine();
 
-        Veiculo NovoVeiculo = null;
+        Veiculo veiculo = null;
         switch (tipoVeiculo) {
-            case 1: NovoVeiculo = new Carro(modelo, placa, cor);
-            case 2: NovoVeiculo = new Moto(modelo, placa, cor);
-            case 3: NovoVeiculo = new Caminhao(modelo, placa, cor);
+            case 1: veiculo = new Carro(modelo, placa, cor);
+            case 2: veiculo = new Moto(modelo, placa, cor);
+            case 3: veiculo = new Caminhao(modelo, placa, cor);
             default:
                 System.out.println("Escolha inválida, veículo não cadastrado.");
                 return;
         }
+        // sistema.cadastrarVeiculo(veiculo);
+        // ADICIONAR CADASTRO DE VEICULO DO SISTEMA
+    }
+
+
+    public static void alterarVeiculo() {
+        System.out.println("Digite o modelo do veículo que deseja alterar: ");
+        String modelo = input.nextLine();
+
+        Veiculo veiculo = sistema.buscarVeiculoPorModelo(modelo);
+        if (veiculo == null) {
+            System.out.println("Veículo não encontrado no sistema.");
+        } else {
+            System.out.println("Placa atual: " + veiculo.getPlaca() + "\nNova Placa: ");
+            String novaPlaca = input.nextLine();
+
+            System.out.println("Cor atual: " + veiculo.getCor() + "\nNova Cor: ");
+            String novaCor = input.nextLine();
+
+            sistema.alterarVeiculo(modelo, novaPlaca, novaCor);
+        }
+    }
+
+
+    public static void buscarVeiculo() {
+        System.out.println("Digite o modelo do veículo que deseja encontrar: ");
+        String parteDoNome = input.nextLine();
+
+        Veiculo veiculo = sistema.buscarVeiculoPorModelo(parteDoNome);
+        if (veiculo != null) {
+            System.out.println(veiculo);
+        }
+        else {
+            System.out.println("Veículo não encontrado no sistema.");
+        }
+    }
+
+
+    public static void listarVeiculos() {
+        System.out.println("Lista de Veículos: ");
+        sistema.listarVeiculos();
     }
 }
