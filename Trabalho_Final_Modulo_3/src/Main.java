@@ -80,6 +80,8 @@ public class Main {
                     break;
                 case 9:alterarAgencia();
                 break;
+                case 10: listarAgencias();
+                break;
                 case 0:
                     System.exit(0);
                     break;
@@ -278,5 +280,11 @@ public class Main {
         String novaCidade = input.nextLine();
 
         sistema.alterarAgencia(novoNome, cidade,novaCidade);
+    }
+
+
+    public static void listarAgencias() {
+        System.out.println("Lista de Agências: ");
+        sistema.listarAgencias();
     }
 }
