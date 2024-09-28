@@ -55,10 +55,15 @@ public class Main {
 
             switch (escolha) {
                 case 1: cadastrarCliente();
+                break;
                 case 2: buscarCliente();
+                break;
                 case 3: cadastrarVeiculo();
+                break;
                 case 0: System.exit(0);
+                break;
                 default: System.out.println("Escolha inválida, por favor digite uma opção válida");
+                break;
             }
         }
     }
@@ -111,11 +116,17 @@ public class Main {
 
             switch (escolha) {
                 case 1: ClientePF.realizarCadastro(sistema);
+                continuar = false;
+                break;
+
                 case 2 : ClientePJ.realizarCadastro(sistema);
-                case 0: {
+                continuar = false;
+                break;
+                case 0:
                     System.out.println("Retornando ao menu inicial...");
                     continuar = false;
-                }
+                    break;
+
                 default: System.out.println("Escolha inválida, por favor digite uma opção válida.");
             }
         }
