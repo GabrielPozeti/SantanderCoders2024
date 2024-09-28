@@ -8,7 +8,7 @@ public class ClientePJ extends Cliente<String> {
     private final int idadeDoResponsavel;
     private final String funcaoDoResponsavel;
 
-    public ClientePJ(String nomeDaEmpresa, String cnpj, String endereco, int telefone,                     String nomeDoResponsavel, String cnhDoResponsavel, int idadeDoResponsavel, String funcaoDoResponsavel) {
+    public ClientePJ(String nomeDaEmpresa, String cnpj, String endereco, long telefone, String nomeDoResponsavel, String cnhDoResponsavel, int idadeDoResponsavel, String funcaoDoResponsavel) {
         super(nomeDaEmpresa, cnpj, endereco, telefone);
         this.nomeDoResponsavel = nomeDoResponsavel;
         this.cnhDoResponsavel = cnhDoResponsavel;
@@ -68,7 +68,7 @@ public class ClientePJ extends Cliente<String> {
         String endereco = input.nextLine();
 
         System.out.print("Digite o telefone da empresa: ");
-        int telefone = input.nextInt();
+        long telefone = input.nextLong();
         input.nextLine();
 
         System.out.print("Digite o nome do responsável: ");

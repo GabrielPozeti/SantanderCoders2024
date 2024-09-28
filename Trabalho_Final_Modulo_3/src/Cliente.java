@@ -2,9 +2,9 @@ public abstract class Cliente<T> {
     private String nome;
     private T documento;
     private String endereco;
-    private int telefone;
+    private long telefone;
 
-    public Cliente(String nome, T documento, String endereco, int telefone) {
+    public Cliente(String nome, T documento, String endereco, long telefone) {
         this.nome = nome;
         this.documento = documento;
         this.endereco = endereco;
@@ -23,7 +23,7 @@ public abstract class Cliente<T> {
         return endereco;
     }
 
-    public int getTelefone() {
+    public long getTelefone() {
         return telefone;
     }
 

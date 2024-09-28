@@ -6,7 +6,7 @@ public class ClientePF extends Cliente<String> {
     private final int idade;
     private final String cnh;
 
-    public ClientePF(String nome, String documento, String endereco, int telefone, int idade, String cnh) {
+    public ClientePF(String nome, String documento, String endereco, long telefone, int idade, String cnh) {
         super(nome, documento, endereco, telefone);
         this.idade = idade;
         this.cnh = cnh;
@@ -67,7 +67,7 @@ public class ClientePF extends Cliente<String> {
         String endereco = input.nextLine();
 
         System.out.print("Telefone: ");
-        int telefone = input.nextInt();
+        long telefone = input.nextLong();
         input.nextLine();
 
         ClientePF novoCliente = new ClientePF(nome, documento, endereco, telefone, idade, cnh);
