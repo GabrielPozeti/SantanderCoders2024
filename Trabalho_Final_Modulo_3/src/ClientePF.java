@@ -45,6 +45,13 @@ public class ClientePF extends Cliente<String> {
         System.out.print("Digite o seu nome: ");
         String nome = input.nextLine();
 
+        for (ClientePF cliente : listaDeClientesPF) {
+            if (cliente.getNome().equals(nome)) {
+                System.out.println("Usuário já cadastrado.");
+                return;
+            }
+        }
+
         System.out.print("Digite o seu CPF ou RG: ");
         String documento = input.nextLine();
 
@@ -55,20 +62,13 @@ public class ClientePF extends Cliente<String> {
         int idade = input.nextInt();
         input.nextLine();
 
-
-        for (ClientePF cliente : listaDeClientesPF) {
-            if (cliente.getNome().equals(nome)) {
-                System.out.println("Usuário já cadastrado.");
-                return;
-            }
-        }
-
         System.out.print("Endereço: ");
         String endereco = input.nextLine();
 
         System.out.print("Telefone: ");
         long telefone = input.nextLong();
         input.nextLine();
+
 
         ClientePF novoCliente = new ClientePF(nome, documento, endereco, telefone, idade, cnh);
         listaDeClientesPF.add(novoCliente);

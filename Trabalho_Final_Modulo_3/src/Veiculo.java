@@ -45,13 +45,14 @@ public abstract class Veiculo implements Locar {
    public abstract double getValorDiaria();
 
     public void alugar() {
-    if (alugado) {
-        alugado = true;
-        System.out.println(modelo + " está alugado.");
-    } else {
-        System.out.println(modelo + " está disponível.");
+        if (!alugado) {
+            alugado = true;
+            System.out.println(modelo + " foi alugado.");
+        } else {
+            System.out.println(modelo + " já está alugado.");
+        }
     }
-    }
+
 
     public void devolver() {
         if (!alugado) {
