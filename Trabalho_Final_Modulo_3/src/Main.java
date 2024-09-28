@@ -107,6 +107,7 @@ public class Main {
 
     }
 
+    //CLIENTES
 
     public static void cadastrarCliente() {
         boolean continuar = true;
@@ -154,6 +155,7 @@ public class Main {
         }
     }
 
+    //VEÍCULOS
 
     public static void cadastrarVeiculo() {
         System.out.println("\nCadastro de Veículo:\n");
@@ -227,4 +229,8 @@ public class Main {
         System.out.println("Lista de Veículos: ");
         sistema.listarVeiculos();
     }
+
+    //AGÊNCIA
+
+
 }
