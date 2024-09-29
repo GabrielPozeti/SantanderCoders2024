@@ -3,20 +3,29 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Sistema {
-    List<Veiculo> veiculos;
-    List<Cliente> clientes;
-    List<Agencia> agencias;
-    List<LocadoraSantander> alugueis;
+    private List<Veiculo> veiculos;
+    private List<Cliente> clientes;
+    private List<ClientePJ> listaDeClientesPJ; // Lista para ClientePJ
+    private List<Agencia> agencias;
+    private List<LocadoraSantander> alugueis;
 
     public Sistema() {
         veiculos = new ArrayList<>();
         clientes = new ArrayList<>();
+        listaDeClientesPJ = new ArrayList<>(); // Inicializa a lista de clientes PJ
         agencias = new ArrayList<>();
         alugueis = new ArrayList<>();
     }
 
-    //VEÍCULOS
+    public List<Cliente> getClientes() {
+        return clientes; // Retorna a lista de clientes
+    }
 
+    public List<ClientePJ> getListaDeClientesPJ() {
+        return listaDeClientesPJ; // Retorna a lista de clientes PJ
+    }
+
+    // VEÍCULOS
     public void cadastrarVeiculo(Veiculo veiculo) {
         for (Veiculo v : veiculos) {
             if (v.getPlaca().equals(veiculo.getPlaca())) {
@@ -28,27 +37,27 @@ public class Sistema {
         System.out.println("Veículo cadastrado com sucesso!");
     }
 
-
     public Veiculo buscarVeiculoPorModelo(String parteDoNome) {
         for (Veiculo veiculo : veiculos) {
-            if (veiculo.getModelo().contains(parteDoNome)) {
+            if (veiculo.getModelo().toLowerCase().contains(parteDoNome.toLowerCase())) {
                 return veiculo;
             }
         }
         return null;
     }
 
-
-    public void alterarVeiculo(String NovaPlaca, String modelo, String NovaCor) {
+    public void alterarVeiculo(String placaAntiga, String novaPlaca, String modelo, String novaCor) {
         Veiculo veiculo = buscarVeiculoPorModelo(modelo);
-        if (veiculo != null) {
-            veiculo.setPlaca(NovaPlaca);
-            veiculo.setCor(NovaCor);
+
+        if (veiculo != null && veiculo.getPlaca().equals(placaAntiga)) {
+            veiculo.setPlaca(novaPlaca);
+            veiculo.setCor(novaCor);
             System.out.println("Veículo alterado com sucesso!");
         } else {
             System.out.println("Veículo não encontrado no sistema.");
         }
     }
+
 
     public void listarVeiculos() {
         if (veiculos.isEmpty()) {
@@ -60,44 +69,35 @@ public class Sistema {
         }
     }
 
-    //AGÊNCIA
-
+    // AGÊNCIA
     public void cadastrarAgencia(Agencia agencia) {
-        boolean agenciaExiste = false;
         for (Agencia a : agencias) {
-            if (a.getNome().equals(agencia.getNome())) {
-                agenciaExiste = true;
-                break;
+            if (a.getNome().equalsIgnoreCase(agencia.getNome())) {
+                System.out.println("Agência já cadastrada no sistema.");
+                return;
             }
         }
-        if (!agenciaExiste) {
-            agencias.add(agencia);
-            System.out.println("Nova agência cadastrada com sucesso!");
-        } else {
-            System.out.println("Agência já cadastrada no sistema.");
-        }
+        agencias.add(agencia);
+        System.out.println("Nova agência cadastrada com sucesso!");
     }
-
 
     public Agencia buscarAgenciaPorNome(String nome) {
         for (Agencia agencia : agencias) {
-            if (agencia.getNome().equals(nome)) {
+            if (agencia.getNome().equalsIgnoreCase(nome)) {
                 return agencia;
             }
         }
         return null;
     }
-
 
     public Agencia buscarAgenciaPorCidade(String cidade) {
         for (Agencia agencia : agencias) {
-            if (agencia.getCidade().equals(cidade)) {
+            if (agencia.getCidade().equalsIgnoreCase(cidade)) {
                 return agencia;
             }
         }
         return null;
     }
-
 
     public void alterarAgencia(String novoNome, String cidade, String novaCidade) {
         Agencia agencia = buscarAgenciaPorCidade(cidade);
@@ -110,7 +110,6 @@ public class Sistema {
         }
     }
 
-
     public void listarAgencias() {
         if (agencias.isEmpty()) {
             System.out.println("Nenhuma agência cadastrada no sistema.");
@@ -121,8 +120,7 @@ public class Sistema {
         }
     }
 
-    //CLIENTES
-
+    // CLIENTES
     public void cadastrarCliente(Cliente cliente) {
         for (Cliente c : clientes) {
             if (c.getDocumento().equals(cliente.getDocumento())) {
@@ -132,10 +130,13 @@ public class Sistema {
         }
         clientes.add(cliente);
         System.out.println("Cliente cadastrado com sucesso!");
+
+        if (cliente instanceof ClientePJ) {
+            listaDeClientesPJ.add((ClientePJ) cliente);
+        }
     }
 
-
-    public Cliente buscarClientePorDocumento(String documento) {
+    public Cliente procurarClientePeloDocumento(String documento) {
         for (Cliente cliente : clientes) {
             if (cliente.getDocumento().equals(documento)) {
                 return cliente;
@@ -154,31 +155,52 @@ public class Sistema {
         }
     }
 
-    //LOCAÇÃO
+    // LOCAÇÃO
+    public void listarLocacoes() {
+        if (alugueis.isEmpty()) {
+            System.out.println("Nenhuma locação registrada no sistema.");
+        } else {
+            System.out.println("Lista de Locações:");
+            for (LocadoraSantander aluguel : alugueis) {
+                System.out.println("Dados do Cliente: ");
+                System.out.println("Nome: " + aluguel.getCliente().getNome());
+                System.out.println("Documento: " + aluguel.getCliente().getDocumento());
+                System.out.println("Dados do Veículo: ");
+                System.out.println("Modelo: " + aluguel.getVeiculo().getModelo());
+                System.out.println("Placa: " + aluguel.getVeiculo().getPlaca());
+                System.out.println("Cor: " + aluguel.getVeiculo().getCor());
+                System.out.println("Alugado na Agência: " + aluguel.getAgencia().getNome() + ", na cidade de " + aluguel.getAgencia().getCidade());
+                System.out.println("Data do Aluguel: " + aluguel.getAluguelData());
+                System.out.println("Data de Devolução: " + (aluguel.getDevolucaoData() != null ? aluguel.getDevolucaoData() : "Ainda não devolvido"));
+                System.out.println("-------------------------------");
+            }
+        }
+    }
 
     public void alugarVeiculo(String documentoCliente, String modeloVeiculo, String cidadeAgencia) {
-        Cliente cliente = buscarClientePorDocumento(documentoCliente);
+        Cliente cliente = procurarClientePeloDocumento(documentoCliente);
         Veiculo veiculo = buscarVeiculoPorModelo(modeloVeiculo);
         Agencia agencia = buscarAgenciaPorCidade(cidadeAgencia);
 
         if (cliente == null) {
             System.out.println("Cliente não encontrado no sistema.");
+            return;
         }
         if (veiculo == null) {
             System.out.println("Veículo não encontrado no sistema.");
+            return;
         }
         if (agencia == null) {
             System.out.println("Agência não encontrada no sistema.");
+            return;
         }
         if (!veiculo.isAlugado()) {
             LocadoraSantander aluguel = new LocadoraSantander(veiculo, cliente, agencia, LocalDateTime.now());
             alugueis.add(aluguel);
             veiculo.setAlugado(true);
 
-            System.out.println("""
-                    Veículo alugado com sucesso!
-                    
-                    ***Comprovante:***""");
+            System.out.println("Veículo alugado com sucesso!\n");
+            System.out.println("Comprovante:");
             System.out.println("Dados do Cliente: ");
             System.out.println("Nome: " + aluguel.getCliente().getNome());
             System.out.println("Documento: " + aluguel.getCliente().getDocumento() + "\n");
@@ -188,12 +210,10 @@ public class Sistema {
             System.out.println("Cor: " + aluguel.getVeiculo().getCor() + "\n");
             System.out.println("Alugado na Agência: " + aluguel.getAgencia().getNome() + ", na cidade de " + aluguel.getAgencia().getCidade() + "\n");
             System.out.println("Data do Aluguel: " + aluguel.getAluguelData());
-
         } else {
             System.out.println("O veículo não está disponível para aluguel no momento.");
         }
     }
-
 
     public void entregarVeiculo(String documentoCliente, String modeloVeiculo, String cidadeAgencia) {
         LocadoraSantander aluguelEncontrado = null;
@@ -207,10 +227,8 @@ public class Sistema {
         }
         if (aluguelEncontrado != null) {
             aluguelEncontrado.entregarVeiculo(LocalDateTime.now(), buscarAgenciaPorCidade(cidadeAgencia));
-            System.out.println("""
-                    Veículo entregue com sucesso!
-                    
-                    ***Comprovante:***""");
+            System.out.println("Veículo entregue com sucesso!\n");
+            System.out.println("Comprovante:");
             System.out.println("Dados do Cliente: ");
             System.out.println("Nome: " + aluguelEncontrado.getCliente().getNome());
             System.out.println("Documento: " + aluguelEncontrado.getCliente().getDocumento() + "\n");
@@ -218,25 +236,11 @@ public class Sistema {
             System.out.println("Modelo: " + aluguelEncontrado.getVeiculo().getModelo());
             System.out.println("Placa: " + aluguelEncontrado.getVeiculo().getPlaca());
             System.out.println("Cor: " + aluguelEncontrado.getVeiculo().getCor() + "\n");
-            System.out.println("Entregue na Agência: " + aluguelEncontrado.getAgencia().getNome()+ ", na cidade de " + aluguelEncontrado.getAgencia().getCidade() + "\n");
-            System.out.println("Data da Entrega: " + aluguelEncontrado.getAluguelData());
-            System.out.println("Valor pago: R$" + aluguelEncontrado.getValorTotal());
-
-        }
-        else {
-            System.out.println("Veículo não encontrado no sistema.");
-        }
-    }
-
-
-    public void listarLocacoes() {
-        if (alugueis.isEmpty()) {
-            System.out.println("Nenhum aluguel encontrado no sistema.");
-        }
-        else {
-            for (LocadoraSantander aluguel : alugueis) {
-                System.out.println(aluguel);
-            }
+            System.out.println("Agência: " + aluguelEncontrado.getAgencia().getNome() + ", na cidade de " + aluguelEncontrado.getAgencia().getCidade() + "\n");
+            System.out.println("Data de Aluguel: " + aluguelEncontrado.getAluguelData());
+            System.out.println("Data de Devolução: " + aluguelEncontrado.getDevolucaoData() + "\n");
+        } else {
+            System.out.println("Nenhum aluguel encontrado para este cliente e veículo.");
         }
     }
 }

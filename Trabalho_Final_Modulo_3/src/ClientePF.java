@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class ClientePF extends Cliente<String> {
@@ -20,16 +18,6 @@ public class ClientePF extends Cliente<String> {
         return cnh;
     }
 
-    private static List<ClientePF> listaDeClientesPF = new ArrayList<>();
-
-    public static List<ClientePF> getListaDeClientesPF() {
-        return listaDeClientesPF;
-    }
-
-    public static void setListaDeClientesPF(List<ClientePF> listaDeClientesPF) {
-        ClientePF.listaDeClientesPF = listaDeClientesPF;
-    }
-
     @Override
     public double calcularDescontoDias(int diasAlugados) {
         if (diasAlugados > 5) {
@@ -38,19 +26,18 @@ public class ClientePF extends Cliente<String> {
         return 0;
     }
 
+    @Override
+    public String toString() {
+        return "Nome: " + getNome() + ", Documento: " + getDocumento() + ", Endereço: " + getEndereco() +
+                ", Telefone: " + getTelefone() + ", Idade: " + idade + ", CNH: " + cnh;
+    }
+
     public static void realizarCadastro(Sistema sistema) {
         Scanner input = new Scanner(System.in);
 
         System.out.println("Cadastro de nova Pessoa Física:");
         System.out.print("Digite o seu nome: ");
         String nome = input.nextLine();
-
-        for (ClientePF cliente : listaDeClientesPF) {
-            if (cliente.getNome().equals(nome)) {
-                System.out.println("Usuário já cadastrado.");
-                return;
-            }
-        }
 
         System.out.print("Digite o seu CPF ou RG: ");
         String documento = input.nextLine();
@@ -69,9 +56,7 @@ public class ClientePF extends Cliente<String> {
         long telefone = input.nextLong();
         input.nextLine();
 
-
         ClientePF novoCliente = new ClientePF(nome, documento, endereco, telefone, idade, cnh);
-        listaDeClientesPF.add(novoCliente);
-        System.out.println("Cadastro realizado com sucesso!\n");
+        sistema.cadastrarCliente(novoCliente);
     }
 }

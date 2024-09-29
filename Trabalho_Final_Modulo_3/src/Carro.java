@@ -7,4 +7,14 @@ public class Carro extends Veiculo {
     public double getValorDiaria() {
         return 150.00;
     }
+
+    @Override
+    public void alugar() {
+
+    }
+
+    @Override
+    public void devolver() {
+
+    }
 }

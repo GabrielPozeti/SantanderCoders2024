@@ -28,4 +28,9 @@ public abstract class Cliente<T> {
     }
 
     public abstract double calcularDescontoDias(int diasAlugados);
+
+    @Override
+    public String toString() {
+        return "Nome: " + nome + ", Documento: " + documento + ", Endereço: " + endereco + ", Telefone: " + telefone;
+    }
 }

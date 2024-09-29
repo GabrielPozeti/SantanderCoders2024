@@ -5,9 +5,10 @@ public abstract class Veiculo implements Locar {
     private boolean alugado;
 
     public Veiculo(String modelo, String placa, String cor) {
-        this.placa = placa;
         this.modelo = modelo;
+        this.placa = placa;
         this.cor = cor;
+        this.alugado = false; // Inicializa como não alugado
     }
 
     public String getPlaca() {
@@ -42,28 +43,9 @@ public abstract class Veiculo implements Locar {
         this.alugado = alugado;
     }
 
-   public abstract double getValorDiaria();
-
-    public void alugar() {
-        if (!alugado) {
-            alugado = true;
-            System.out.println(modelo + " foi alugado.");
-        } else {
-            System.out.println(modelo + " já está alugado.");
-        }
-    }
-
-
-    public void devolver() {
-        if (!alugado) {
-            alugado = false;
-            System.out.println(modelo + " foi devolvido.");
-        } else {
-            System.out.println(modelo + " está disponível.");
-        }
-    }
+    public abstract double getValorDiaria();
 
     public String toString() {
-        return "Veículo -> Modelo: " + modelo + " | Placa: " + placa + " | Cor: " + cor + ". " + "Alugado: "+ alugado;
+        return "Veículo -> Modelo: " + modelo + " | Placa: " + placa + " | Cor: " + cor + ". " + "Alugado: " + alugado;
     }
 }

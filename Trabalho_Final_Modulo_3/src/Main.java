@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.InputMismatchException;
 
 public class Main {
 
@@ -46,12 +47,18 @@ public class Main {
     }
 
     public static void main(String[] args) {
-
         while (true) {
             Logo.exibirLogoLocadora();
             exibirMenu();
-            int escolha = input.nextInt();
-            input.nextLine();
+            int escolha;
+            try {
+                escolha = input.nextInt();
+                input.nextLine();
+            } catch (InputMismatchException e) {
+                System.out.println("Entrada inválida. Por favor, digite um número.");
+                input.nextLine();
+                continue;
+            }
 
             switch (escolha) {
                 case 1:
@@ -78,16 +85,21 @@ public class Main {
                 case 8:
                     cadastrarAgencia();
                     break;
-                case 9:alterarAgencia();
-                break;
-                case 10: listarAgencias();
-                break;
-                case 11: alugarVeiculo();
-                break;
-                case 12: entregarVeiculo();
-                break;
-                case 13: listarLocacoes();
-                break;
+                case 9:
+                    alterarAgencia();
+                    break;
+                case 10:
+                    listarAgencias();
+                    break;
+                case 11:
+                    alugarVeiculo();
+                    break;
+                case 12:
+                    entregarVeiculo();
+                    break;
+                case 13:
+                    listarLocacoes();
+                    break;
                 case 0:
                     System.exit(0);
                     break;
@@ -98,35 +110,34 @@ public class Main {
         }
     }
 
-
     public static void exibirMenu() {
         System.out.println("""
                 Menu Aluguel de Veículos:
-                (Digite o número da opção desejada)
-                                
+                               \s
                 Clientes:
                 1- Cadastrar novo cliente
                 2- Buscar cliente
                 3- Verificar lista de clientes
-                                
+                               \s
                 Veículos:
                 4- Cadastrar novo veículo
                 5- Alterar veículo cadastrado
                 6- Buscar veículo
                 7- Verificar lista de veículos
-                                
+                               \s
                 Agência:
                 8- Cadastrar nova agência
                 9- Alterar agência cadastrada
                 10- Verificar lista de agências
-                                
+                               \s
                 Locação:
                 11- Alugar veículo
                 12- Devolver veículo
                 13- Verificar lista de veículos alugados
-                                
-                0- Sair""");
-
+                               \s
+                0- Sair
+                Digite o número da opção desejada:
+                """);
     }
 
     //CLIENTES
@@ -135,10 +146,10 @@ public class Main {
         boolean continuar = true;
 
         while (continuar) {
-            System.out.println("""
+            System.out.println(""" 
                     Cadastro de Cliente:
                     (Digite o número da opção desejada)
-                                        
+                                       \s
                     1- Cadastrar nova Pessoa Física
                     2- Cadastrar nova Pessoa Jurídica
                     0- Retornar ao menu inicial""");
@@ -166,14 +177,13 @@ public class Main {
         }
     }
 
-
     public static void buscarCliente() {
-        System.out.println("Digite o documento do cliente que está buscando: ");
+        System.out.println("Digite o CPF ou RG do cliente a ser buscado: ");
         String documento = input.nextLine();
 
-        Cliente buscaCliente = sistema.buscarClientePorDocumento(documento);
+        Cliente buscaCliente = sistema.procurarClientePeloDocumento(documento);
         if (buscaCliente != null) {
-            System.out.println("Cliente encontrado no sistema!");
+            System.out.println("Cliente encontrado: " + buscaCliente);
         } else {
             System.out.println("Cliente não encontrado no sistema.");
         }
@@ -182,8 +192,26 @@ public class Main {
     //VEÍCULOS
 
     public static void cadastrarVeiculo() {
+
         System.out.println("\nCadastro de Veículo:\n");
-        System.out.println("Modelo: ");
+        int tipoVeiculo = -1;
+        while (tipoVeiculo < 1 || tipoVeiculo > 3) {
+            System.out.println(""" 
+            Tipo de Veículo:
+            (Digite o número da opção desejada)
+
+            1- Carro
+            2- Moto
+            3- Caminhão""");
+            tipoVeiculo = input.nextInt();
+            input.nextLine();
+            if (tipoVeiculo < 1 || tipoVeiculo > 3) {
+                System.out.println("Escolha inválida, por favor digite uma opção válida.");
+            }
+        }
+
+
+        System.out.println("Modelo do Veículo: ");
         String modelo = input.nextLine();
 
         System.out.println("Placa: ");
@@ -192,31 +220,26 @@ public class Main {
         System.out.println("Cor: ");
         String cor = input.nextLine();
 
-        System.out.println("""
-                Tipo de Veículo:
-                (Digite o número da opção desejada)
 
-                1- Carro
-                2- Moto
-                3- Caminhão""");
-        int tipoVeiculo = input.nextInt();
-        input.nextLine();
 
-        Veiculo veiculo = null;
+        Veiculo veiculo;
         switch (tipoVeiculo) {
             case 1:
                 veiculo = new Carro(modelo, placa, cor);
+                break;
             case 2:
                 veiculo = new Moto(modelo, placa, cor);
+                break;
             case 3:
                 veiculo = new Caminhao(modelo, placa, cor);
-                sistema.cadastrarVeiculo(veiculo);
+                break;
             default:
                 System.out.println("Escolha inválida, veículo não cadastrado.");
                 return;
         }
-    }
 
+        sistema.cadastrarVeiculo(veiculo);
+    }
 
     public static void alterarVeiculo() {
         System.out.println("Digite o modelo do veículo que deseja alterar: ");
@@ -226,13 +249,16 @@ public class Main {
         if (veiculo == null) {
             System.out.println("Veículo não encontrado no sistema.");
         } else {
-            System.out.println("Placa atual: " + veiculo.getPlaca() + "\nNova Placa: ");
+            System.out.println("Placa atual: " + veiculo.getPlaca());
+            String placaAntiga = veiculo.getPlaca();
+
+            System.out.print("Nova Placa: ");
             String novaPlaca = input.nextLine();
 
-            System.out.println("Cor atual: " + veiculo.getCor() + "\nNova Cor: ");
+            System.out.print("Cor atual: " + veiculo.getCor() + "\nNova Cor: ");
             String novaCor = input.nextLine();
 
-            sistema.alterarVeiculo(modelo, novaPlaca, novaCor);
+            sistema.alterarVeiculo(placaAntiga, novaPlaca, modelo, novaCor);
         }
     }
 
@@ -248,7 +274,6 @@ public class Main {
             System.out.println("Veículo não encontrado no sistema.");
         }
     }
-
 
     public static void listarVeiculos() {
         System.out.println("Lista de Veículos: ");
@@ -268,7 +293,6 @@ public class Main {
         sistema.cadastrarAgencia(agencia);
     }
 
-
     public static void alterarAgencia() {
         System.out.println("Digite a cidade da agência que deseja alterar");
         String cidade = input.nextLine();
@@ -276,7 +300,7 @@ public class Main {
         Agencia agencia = sistema.buscarAgenciaPorCidade(cidade);
         if (agencia == null) {
             System.out.println("Agência não encontrada no sistema.");
-        return;
+            return;
         }
 
         System.out.println("Nome atual: " + agencia.getNome() + "\nNovo Nome: ");
@@ -285,9 +309,8 @@ public class Main {
         System.out.println("Cidade atual: " + agencia.getCidade() + "\nNova Cidade: ");
         String novaCidade = input.nextLine();
 
-        sistema.alterarAgencia(novoNome, cidade,novaCidade);
+        sistema.alterarAgencia(novoNome, cidade, novaCidade);
     }
-
 
     public static void listarAgencias() {
         System.out.println("Lista de Agências: ");
@@ -299,29 +322,39 @@ public class Main {
     public static void alugarVeiculo() {
         System.out.println("Documento do cliente: ");
         String documentoCliente = input.nextLine();
+
+        Cliente cliente = sistema.procurarClientePeloDocumento(documentoCliente);
+        if (cliente == null) {
+            System.out.println("Cliente não encontrado. Não é possível alugar o veículo.");
+            return;
+        }
+
         System.out.println("Modelo do veículo: ");
         String modeloVeiculo = input.nextLine();
+
         System.out.println("Cidade da agência de retirada: ");
         String cidadeAgencia = input.nextLine();
 
         sistema.alugarVeiculo(documentoCliente, modeloVeiculo, cidadeAgencia);
     }
 
-
     public static void entregarVeiculo() {
-        System.out.println("Documento do cliente: ");
+        System.out.println("Digite o documento do cliente que deseja entregar o veículo: ");
         String documentoCliente = input.nextLine();
-        System.out.println("Modelo do veículo: ");
+
+        System.out.println("Digite o modelo do veículo: ");
         String modeloVeiculo = input.nextLine();
-        System.out.println("Cidade da agência de devolução: ");
+
+        System.out.println("Digite a cidade da agência: ");
         String cidadeAgencia = input.nextLine();
 
         sistema.entregarVeiculo(documentoCliente, modeloVeiculo, cidadeAgencia);
     }
 
-
     public static void listarLocacoes() {
-        System.out.println("Lista de Locações: ");
         sistema.listarLocacoes();
     }
+
 }
+
+
