@@ -203,7 +203,8 @@ public class Sistema {
             System.out.println("Comprovante:");
             System.out.println("Dados do Cliente: ");
             System.out.println("Nome: " + aluguel.getCliente().getNome());
-            System.out.println("Documento: " + aluguel.getCliente().getDocumento() + "\n");
+            System.out.println("Documento: " + aluguel.getCliente().getDocumento());
+            System.out.println("Telefone: " + aluguel.getCliente().getTelefone() + "\n");
             System.out.println("Dados do Veículo: ");
             System.out.println("Modelo: " + aluguel.getVeiculo().getModelo());
             System.out.println("Placa: " + aluguel.getVeiculo().getPlaca());
@@ -231,7 +232,8 @@ public class Sistema {
             System.out.println("Comprovante:");
             System.out.println("Dados do Cliente: ");
             System.out.println("Nome: " + aluguelEncontrado.getCliente().getNome());
-            System.out.println("Documento: " + aluguelEncontrado.getCliente().getDocumento() + "\n");
+            System.out.println("Documento: " + aluguelEncontrado.getCliente().getDocumento());
+            System.out.println("Telefone: " + aluguelEncontrado.getCliente().getTelefone() + "\n");
             System.out.println("Dados do Veículo: ");
             System.out.println("Modelo: " + aluguelEncontrado.getVeiculo().getModelo());
             System.out.println("Placa: " + aluguelEncontrado.getVeiculo().getPlaca());
@@ -239,6 +241,7 @@ public class Sistema {
             System.out.println("Agência: " + aluguelEncontrado.getAgencia().getNome() + ", na cidade de " + aluguelEncontrado.getAgencia().getCidade() + "\n");
             System.out.println("Data de Aluguel: " + aluguelEncontrado.getAluguelData());
             System.out.println("Data de Devolução: " + aluguelEncontrado.getDevolucaoData() + "\n");
+            System.out.println("Valor Total: " + aluguelEncontrado.getValorTotal());
         } else {
             System.out.println("Nenhum aluguel encontrado para este cliente e veículo.");
         }
