@@ -241,7 +241,7 @@ public class Sistema {
             System.out.println("Agência: " + aluguelEncontrado.getAgencia().getNome() + ", na cidade de " + aluguelEncontrado.getAgencia().getCidade() + "\n");
             System.out.println("Data de Aluguel: " + aluguelEncontrado.getAluguelData());
             System.out.println("Data de Devolução: " + aluguelEncontrado.getDevolucaoData() + "\n");
-            System.out.println("Valor Total: " + aluguelEncontrado.getValorTotal());
+            System.out.printf("Valor Total: R$%.2f\n", aluguelEncontrado.getValorTotal());
         } else {
             System.out.println("Nenhum aluguel encontrado para este cliente e veículo.");
         }
