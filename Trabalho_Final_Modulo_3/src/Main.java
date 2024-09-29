@@ -178,7 +178,7 @@ public class Main {
     }
 
     public static void buscarCliente() {
-        System.out.println("Digite o CPF ou RG do cliente a ser buscado: ");
+        System.out.println("Digite o documento do cliente a ser buscado: ");
         String documento = input.nextLine();
 
         Cliente buscaCliente = sistema.procurarClientePeloDocumento(documento);

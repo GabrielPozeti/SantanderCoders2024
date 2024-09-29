@@ -36,6 +36,12 @@ public class ClientePJ extends Cliente<String> {
         return diasAlugados > 7 ? 0.1 : 0.0;
     }
 
+    @Override
+    public String toString() {
+        return "Nome: " + getNome() + ", CNPJ: " + getDocumento() + ", Endereço: " + getEndereco() +
+                ", Telefone: " + getTelefone() + ", Nome do Responsável: " + getNomeDoResponsavel() + ", Idade do Responsável: " + getIdadeDoResponsavel() + ", Função do Responsável: " + getFuncaoDoResponsavel() + ", CNH do Responsável: " + getCnhDoResponsavel();
+    }
+
     public static void realizarCadastro(Sistema sistema) {
         Scanner input = new Scanner(System.in);
 
