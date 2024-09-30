@@ -28,7 +28,7 @@ A estrutura do projeto é composta pelas seguintes classes:
     - Classe base para veículos, contendo atributos e métodos comuns.
 
 - **Carro**, **Moto**, **Caminhao**
-    - Extensões da classe Veiculo, representando tipos específicos de veículos.
+    - Extensões da classe Veiculo que herdam suas caracteristicas, representando tipos específicos de veículos.
 
 - **Agencia**
     - Representa uma agência de locação de veículos.
