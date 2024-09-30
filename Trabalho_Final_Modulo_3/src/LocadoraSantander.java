@@ -43,7 +43,7 @@ public class LocadoraSantander {
 
     public double getValorTotal() {
         if (devolucaoData != null) {
-            long dias = aluguelData.until(devolucaoData, java.time.temporal.ChronoUnit.DAYS);
+            long dias = aluguelData.until(devolucaoData, java.time.temporal.ChronoUnit.DAYS) + 1;
             return veiculo.getValorDiaria() * dias;
         }
         return 0.0;
