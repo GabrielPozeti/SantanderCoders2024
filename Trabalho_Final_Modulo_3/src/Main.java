@@ -112,7 +112,7 @@ public class Main {
 
     public static void exibirMenu() {
         System.out.println("""
-                Menu Aluguel de Veículos:
+                \nMenu Aluguel de Veículos:
                                \s
                 Clientes:
                 1- Cadastrar novo cliente

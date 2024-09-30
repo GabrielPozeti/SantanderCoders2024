@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class ClientePF extends Cliente implements ICliente {
+public class ClientePF extends Cliente<String> implements ICliente<String> {
     private final int idade;
     private final String cnh;
 
@@ -21,6 +21,7 @@ public class ClientePF extends Cliente implements ICliente {
                 getNome(), getDocumento(), getEndereco(), getTelefone(), idade, cnh);
     }
 
+    // Métodos getters
     @Override
     public String getNome() {
         return super.getNome();
@@ -40,6 +41,7 @@ public class ClientePF extends Cliente implements ICliente {
     public long getTelefone() {
         return super.getTelefone();
     }
+
 
     public static void realizarCadastro(Sistema sistema) {
         Scanner input = new Scanner(System.in);

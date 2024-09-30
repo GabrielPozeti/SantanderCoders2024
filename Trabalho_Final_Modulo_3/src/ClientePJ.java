@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class ClientePJ extends Cliente<String> implements ICliente {
+public class ClientePJ extends Cliente<String> implements ICliente<String> {
     private final String nomeDoResponsavel;
     private final String cnhDoResponsavel;
     private final int idadeDoResponsavel;
@@ -18,21 +18,15 @@ public class ClientePJ extends Cliente<String> implements ICliente {
 
     @Override
     public double calcularDescontoDias(int diasAlugados) {
-        if (diasAlugados > 3) {
-            return 0.10;
-        }
-        return 0;
+        return (diasAlugados > 3) ? 0.10 : 0;
     }
 
     @Override
     public String toString() {
-        return "Nome da Empresa: " + getNome() + ", CNPJ: " + getDocumento() +
-                ", Endereço: " + getEndereco() + ", Telefone: " + getTelefone() +
-                ", Nome do Responsável: " + nomeDoResponsavel +
-                ", CNH do Responsável: " + cnhDoResponsavel +
-                ", Idade do Responsável: " + idadeDoResponsavel +
-                ", Função do Responsável: " + funcaoDoResponsavel;
+        return String.format("Nome da Empresa: %s | CNPJ: %s | Endereço: %s | Telefone: %d | Nome do Responsável: %s | CNH do Responsável: %s | Idade do Responsável: %d | Função do Responsável: %s",
+                getNome(), getDocumento(), getEndereco(), getTelefone(), nomeDoResponsavel, cnhDoResponsavel, idadeDoResponsavel, funcaoDoResponsavel);
     }
+
 
     @Override
     public String getNome() {
@@ -53,6 +47,7 @@ public class ClientePJ extends Cliente<String> implements ICliente {
     public long getTelefone() {
         return super.getTelefone();
     }
+
 
     public static void realizarCadastro(Sistema sistema) {
         Scanner input = new Scanner(System.in);

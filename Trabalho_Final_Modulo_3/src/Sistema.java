@@ -17,10 +17,6 @@ public class Sistema {
         alugueis = new ArrayList<>();
     }
 
-    public List<Cliente> getClientes() {
-        return clientes;
-    }
-
     public List<ClientePJ> getListaDeClientesPJ() {
         return listaDeClientesPJ;
     }

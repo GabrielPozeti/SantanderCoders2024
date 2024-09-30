@@ -1,6 +1,6 @@
-public interface ICliente {
+public interface ICliente<T> {
     String getNome();
-    String getDocumento();
+    T getDocumento();
     String getEndereco();
     long getTelefone();
 }
