@@ -1,21 +1,21 @@
 public abstract class Cliente<T> {
     protected String nome;
-    protected T documento;
+    protected String documento;
     protected String endereco;
     protected long telefone;
 
-    public Cliente(String nome, T documento, String endereco, long telefone) {
+    public Cliente(String nome, String documento, String endereco, long telefone) {
         this.nome = nome;
         this.documento = documento;
         this.endereco = endereco;
-        this.telefone = telefone;
+        this.telefone = telefone; // Agora está incluído no construtor
     }
 
     public String getNome() {
         return nome;
     }
 
-    public T getDocumento() {
+    public String getDocumento() {
         return documento;
     }
 
@@ -23,14 +23,9 @@ public abstract class Cliente<T> {
         return endereco;
     }
 
-    public long getTelefone() {
+    public long getTelefone() { // Método para acessar o telefone
         return telefone;
     }
 
     public abstract double calcularDescontoDias(int diasAlugados);
-
-    @Override
-    public String toString() {
-        return "Nome: " + nome + ", Documento: " + documento + ", Endereço: " + endereco + ", Telefone: " + telefone;
-    }
 }

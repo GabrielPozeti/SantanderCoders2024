@@ -1,11 +1,11 @@
 import java.util.Scanner;
 
-public class ClientePF extends Cliente<String> implements ICliente {
+public class ClientePF extends Cliente {
     private final int idade;
     private final String cnh;
 
     public ClientePF(String nome, String documento, String endereco, long telefone, int idade, String cnh) {
-        super(nome, documento, endereco, telefone);
+        super(nome, documento, endereco, telefone); // Construtor da classe pai
         this.idade = idade;
         this.cnh = cnh;
     }
@@ -19,37 +19,14 @@ public class ClientePF extends Cliente<String> implements ICliente {
     }
 
     @Override
-    public String getNome() {
-        return nome;
-    }
-
-    @Override
-    public String getDocumento() {
-        return documento;
-    }
-
-    @Override
-    public String getEndereco() {
-        return endereco;
-    }
-
-    @Override
-    public long getTelefone() {
-        return telefone;
-    }
-
-    @Override
     public double calcularDescontoDias(int diasAlugados) {
-        if (diasAlugados > 5) {
-            return 0.05;
-        }
-        return 0;
+        return (diasAlugados > 5) ? 0.05 : 0; // 5% de desconto se alugar por mais de 5 dias
     }
 
     @Override
     public String toString() {
-        return "Nome: " + getNome() + ", Documento: " + getDocumento() + ", Endereço: " + getEndereco() +
-                ", Telefone: " + getTelefone() + ", Idade: " + idade + ", CNH: " + cnh;
+        return String.format("Cliente PF -> Nome: %s | Documento: %s | Endereço: %s | Telefone: %d | Idade: %d | CNH: %s",
+                getNome(), getDocumento(), getEndereco(), getTelefone(), idade, cnh);
     }
 
     public static void realizarCadastro(Sistema sistema) {

@@ -25,6 +25,6 @@ public class Agencia {
 
     @Override
     public String toString() {
-        return "Agência: " + nome + " | Cidade: " + cidade;
+        return String.format("Agência -> Nome: %s | Cidade: %s", nome, cidade);
     }
 }

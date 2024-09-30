@@ -6,9 +6,10 @@ public class ClientePJ extends Cliente<String> implements ICliente {
     private final int idadeDoResponsavel;
     private final String funcaoDoResponsavel;
 
-    public ClientePJ(String nomeDaEmpresa, String cnpj, String endereco, long telefone,
-                     String nomeDoResponsavel, String cnhDoResponsavel, int idadeDoResponsavel, String funcaoDoResponsavel) {
-        super(nomeDaEmpresa, cnpj, endereco, telefone);
+    public ClientePJ(String nome, String documento, String endereco, long telefone,
+                     String nomeDoResponsavel, String cnhDoResponsavel,
+                     int idadeDoResponsavel, String funcaoDoResponsavel) {
+        super(nome, documento, endereco, telefone);
         this.nomeDoResponsavel = nomeDoResponsavel;
         this.cnhDoResponsavel = cnhDoResponsavel;
         this.idadeDoResponsavel = idadeDoResponsavel;
@@ -32,41 +33,21 @@ public class ClientePJ extends Cliente<String> implements ICliente {
     }
 
     @Override
-    public String getNome() {
-        return nome;
-    }
-
-    @Override
-    public String getDocumento() {
-        return documento;
-    }
-
-    @Override
-    public String getEndereco() {
-        return endereco;
-    }
-
-    @Override
-    public long getTelefone() {
-        return telefone;
-    }
-
-    @Override
     public double calcularDescontoDias(int diasAlugados) {
-        if (diasAlugados > 7) {
-            return 0.1;
-        } else {
-            return 0.0;
+        if (diasAlugados > 3) {
+            return 0.10; // Desconto de 10% para aluguéis acima de 3 dias
         }
+        return 0;
     }
-
 
     @Override
     public String toString() {
-        return "Nome: " + getNome() + ", CNPJ: " + getDocumento() + ", Endereço: " + getEndereco() +
-                ", Telefone: " + getTelefone() + ", Nome do Responsável: " + getNomeDoResponsavel() +
-                ", Idade do Responsável: " + getIdadeDoResponsavel() + ", Função do Responsável: " +
-                getFuncaoDoResponsavel() + ", CNH do Responsável: " + getCnhDoResponsavel();
+        return "Nome da Empresa: " + getNome() + ", CNPJ: " + getDocumento() +
+                ", Endereço: " + getEndereco() + ", Telefone: " + getTelefone() +
+                ", Nome do Responsável: " + nomeDoResponsavel +
+                ", CNH do Responsável: " + cnhDoResponsavel +
+                ", Idade do Responsável: " + idadeDoResponsavel +
+                ", Função do Responsável: " + funcaoDoResponsavel;
     }
 
     public static void realizarCadastro(Sistema sistema) {
@@ -75,11 +56,6 @@ public class ClientePJ extends Cliente<String> implements ICliente {
         System.out.println("Cadastro de nova Pessoa Jurídica:");
         System.out.print("Digite o nome da empresa: ");
         String nomeDaEmpresa = input.nextLine();
-
-        if (sistema.getClientes().stream().anyMatch(cliente -> cliente.getNome().equals(nomeDaEmpresa))) {
-            System.out.println("Empresa já cadastrada.");
-            return;
-        }
 
         System.out.print("Digite o CNPJ: ");
         String cnpj = input.nextLine();
@@ -103,7 +79,6 @@ public class ClientePJ extends Cliente<String> implements ICliente {
 
         System.out.print("Função do Responsável: ");
         String funcaoDoResponsavel = input.nextLine();
-
 
         ClientePJ novoCliente = new ClientePJ(nomeDaEmpresa, cnpj, endereco, telefone,
                 nomeDoResponsavel, cnhDoResponsavel, idadeDoResponsavel, funcaoDoResponsavel);

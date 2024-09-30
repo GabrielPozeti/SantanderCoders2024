@@ -1,4 +1,4 @@
-public abstract class Veiculo implements Locar {
+public abstract class Veiculo {
     private String modelo;
     private String placa;
     private String cor;
@@ -16,6 +16,9 @@ public abstract class Veiculo implements Locar {
     }
 
     public void setPlaca(String placa) {
+        if (placa == null || placa.isEmpty()) {
+            throw new IllegalArgumentException("A placa não pode ser nula ou vazia.");
+        }
         this.placa = placa;
     }
 
@@ -45,8 +48,22 @@ public abstract class Veiculo implements Locar {
 
     public abstract double getValorDiaria();
 
+    @Override
     public String toString() {
-        return "Veículo -> Modelo: " + modelo + " | Placa: " + placa + " | Cor: " + cor + " | " + "Alugado: " + alugado;
+        return String.format("Veículo -> Modelo: %s | Placa: %s | Cor: %s | Alugado: %b", modelo, placa, cor, alugado);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (!(obj instanceof Veiculo)) return false;
+        Veiculo other = (Veiculo) obj;
+        return placa.equals(other.placa);
+    }
+
+    @Override
+    public int hashCode() {
+        return placa.hashCode();
     }
 
     public abstract void alugar();
