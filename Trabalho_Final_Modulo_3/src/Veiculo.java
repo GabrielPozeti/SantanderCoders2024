@@ -48,4 +48,8 @@ public abstract class Veiculo implements Locar {
     public String toString() {
         return "Veículo -> Modelo: " + modelo + " | Placa: " + placa + " | Cor: " + cor + " | " + "Alugado: " + alugado;
     }
+
+    public abstract void alugar();
+
+    public abstract void devolver();
 }

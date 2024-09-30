@@ -1,8 +1,8 @@
 public abstract class Cliente<T> {
-    private String nome;
-    private T documento;
-    private String endereco;
-    private long telefone;
+    protected String nome;
+    protected T documento;
+    protected String endereco;
+    protected long telefone;
 
     public Cliente(String nome, T documento, String endereco, long telefone) {
         this.nome = nome;

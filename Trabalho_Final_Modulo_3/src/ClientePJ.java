@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class ClientePJ extends Cliente<String> {
+public class ClientePJ extends Cliente<String> implements ICliente {
     private final String nomeDoResponsavel;
     private final String cnhDoResponsavel;
     private final int idadeDoResponsavel;
@@ -32,14 +32,41 @@ public class ClientePJ extends Cliente<String> {
     }
 
     @Override
-    public double calcularDescontoDias(int diasAlugados) {
-        return diasAlugados > 7 ? 0.1 : 0.0;
+    public String getNome() {
+        return nome;
     }
+
+    @Override
+    public String getDocumento() {
+        return documento;
+    }
+
+    @Override
+    public String getEndereco() {
+        return endereco;
+    }
+
+    @Override
+    public long getTelefone() {
+        return telefone;
+    }
+
+    @Override
+    public double calcularDescontoDias(int diasAlugados) {
+        if (diasAlugados > 7) {
+            return 0.1;
+        } else {
+            return 0.0;
+        }
+    }
+
 
     @Override
     public String toString() {
         return "Nome: " + getNome() + ", CNPJ: " + getDocumento() + ", Endereço: " + getEndereco() +
-                ", Telefone: " + getTelefone() + ", Nome do Responsável: " + getNomeDoResponsavel() + ", Idade do Responsável: " + getIdadeDoResponsavel() + ", Função do Responsável: " + getFuncaoDoResponsavel() + ", CNH do Responsável: " + getCnhDoResponsavel();
+                ", Telefone: " + getTelefone() + ", Nome do Responsável: " + getNomeDoResponsavel() +
+                ", Idade do Responsável: " + getIdadeDoResponsavel() + ", Função do Responsável: " +
+                getFuncaoDoResponsavel() + ", CNH do Responsável: " + getCnhDoResponsavel();
     }
 
     public static void realizarCadastro(Sistema sistema) {
@@ -77,9 +104,9 @@ public class ClientePJ extends Cliente<String> {
         System.out.print("Função do Responsável: ");
         String funcaoDoResponsavel = input.nextLine();
 
+
         ClientePJ novoCliente = new ClientePJ(nomeDaEmpresa, cnpj, endereco, telefone,
-                nomeDoResponsavel, cnhDoResponsavel,
-                idadeDoResponsavel, funcaoDoResponsavel);
+                nomeDoResponsavel, cnhDoResponsavel, idadeDoResponsavel, funcaoDoResponsavel);
 
         sistema.cadastrarCliente(novoCliente);
     }

@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class ClientePF extends Cliente<String> {
+public class ClientePF extends Cliente<String> implements ICliente {
     private final int idade;
     private final String cnh;
 
@@ -16,6 +16,26 @@ public class ClientePF extends Cliente<String> {
 
     public String getCnh() {
         return cnh;
+    }
+
+    @Override
+    public String getNome() {
+        return nome;
+    }
+
+    @Override
+    public String getDocumento() {
+        return documento;
+    }
+
+    @Override
+    public String getEndereco() {
+        return endereco;
+    }
+
+    @Override
+    public long getTelefone() {
+        return telefone;
     }
 
     @Override
