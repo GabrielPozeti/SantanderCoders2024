@@ -47,8 +47,8 @@ public class Main {
     }
 
     public static void main(String[] args) {
+        Logo.exibirLogoLocadora();
         while (true) {
-            Logo.exibirLogoLocadora();
             exibirMenu();
             int escolha;
             try {
@@ -147,14 +147,22 @@ public class Main {
 
         while (continuar) {
             System.out.println(""" 
-                    Cadastro de Cliente:
-                    (Digite o número da opção desejada)
+                Cadastro de Cliente:
+                (Digite o número da opção desejada)
                                        \s
-                    1- Cadastrar nova Pessoa Física
-                    2- Cadastrar nova Pessoa Jurídica
-                    0- Retornar ao menu inicial""");
-            int escolha = input.nextInt();
-            input.nextLine();
+                1- Cadastrar nova Pessoa Física
+                2- Cadastrar nova Pessoa Jurídica
+                0- Retornar ao menu inicial""");
+            int escolha = -1;
+
+            try {
+                escolha = input.nextInt();
+                input.nextLine();
+            } catch (InputMismatchException e) {
+                System.out.println("Entrada inválida. Por favor, digite um número.");
+                input.nextLine();
+                continue;
+            }
 
             switch (escolha) {
                 case 1:
@@ -192,9 +200,9 @@ public class Main {
     //VEÍCULOS
 
     public static void cadastrarVeiculo() {
-
         System.out.println("\nCadastro de Veículo:\n");
         int tipoVeiculo = -1;
+
         while (tipoVeiculo < 1 || tipoVeiculo > 3) {
             System.out.println(""" 
             Tipo de Veículo:
@@ -203,13 +211,19 @@ public class Main {
             1- Carro
             2- Moto
             3- Caminhão""");
-            tipoVeiculo = input.nextInt();
-            input.nextLine();
-            if (tipoVeiculo < 1 || tipoVeiculo > 3) {
-                System.out.println("Escolha inválida, por favor digite uma opção válida.");
+
+            try {
+                tipoVeiculo = input.nextInt();
+                input.nextLine();
+
+                if (tipoVeiculo < 1 || tipoVeiculo > 3) {
+                    System.out.println("Escolha inválida, por favor digite uma opção válida.");
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("Entrada inválida. Por favor, digite um número.");
+                input.nextLine();
             }
         }
-
 
         System.out.println("Modelo do Veículo: ");
         String modelo = input.nextLine();
@@ -219,8 +233,6 @@ public class Main {
 
         System.out.println("Cor: ");
         String cor = input.nextLine();
-
-
 
         Veiculo veiculo;
         switch (tipoVeiculo) {

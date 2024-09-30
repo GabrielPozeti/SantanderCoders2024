@@ -16,26 +16,10 @@ public class ClientePJ extends Cliente<String> implements ICliente {
         this.funcaoDoResponsavel = funcaoDoResponsavel;
     }
 
-    public String getNomeDoResponsavel() {
-        return nomeDoResponsavel;
-    }
-
-    public String getCnhDoResponsavel() {
-        return cnhDoResponsavel;
-    }
-
-    public int getIdadeDoResponsavel() {
-        return idadeDoResponsavel;
-    }
-
-    public String getFuncaoDoResponsavel() {
-        return funcaoDoResponsavel;
-    }
-
     @Override
     public double calcularDescontoDias(int diasAlugados) {
         if (diasAlugados > 3) {
-            return 0.10; // Desconto de 10% para aluguéis acima de 3 dias
+            return 0.10;
         }
         return 0;
     }
@@ -48,6 +32,26 @@ public class ClientePJ extends Cliente<String> implements ICliente {
                 ", CNH do Responsável: " + cnhDoResponsavel +
                 ", Idade do Responsável: " + idadeDoResponsavel +
                 ", Função do Responsável: " + funcaoDoResponsavel;
+    }
+
+    @Override
+    public String getNome() {
+        return super.getNome();
+    }
+
+    @Override
+    public String getDocumento() {
+        return super.getDocumento();
+    }
+
+    @Override
+    public String getEndereco() {
+        return super.getEndereco();
+    }
+
+    @Override
+    public long getTelefone() {
+        return super.getTelefone();
     }
 
     public static void realizarCadastro(Sistema sistema) {

@@ -3,5 +3,4 @@ public interface ICliente {
     String getDocumento();
     String getEndereco();
     long getTelefone();
-    double calcularDescontoDias(int diasAlugados);
 }

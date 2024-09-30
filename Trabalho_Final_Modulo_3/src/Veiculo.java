@@ -8,7 +8,7 @@ public abstract class Veiculo {
         this.modelo = modelo;
         this.placa = placa;
         this.cor = cor;
-        this.alugado = false; // Inicializa como não alugado
+        this.alugado = false;
     }
 
     public String getPlaca() {

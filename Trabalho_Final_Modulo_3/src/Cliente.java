@@ -8,7 +8,7 @@ public abstract class Cliente<T> {
         this.nome = nome;
         this.documento = documento;
         this.endereco = endereco;
-        this.telefone = telefone; // Agora está incluído no construtor
+        this.telefone = telefone;
     }
 
     public String getNome() {
@@ -23,7 +23,7 @@ public abstract class Cliente<T> {
         return endereco;
     }
 
-    public long getTelefone() { // Método para acessar o telefone
+    public long getTelefone() {
         return telefone;
     }
 

@@ -1,32 +1,44 @@
 import java.util.Scanner;
 
-public class ClientePF extends Cliente {
+public class ClientePF extends Cliente implements ICliente {
     private final int idade;
     private final String cnh;
 
     public ClientePF(String nome, String documento, String endereco, long telefone, int idade, String cnh) {
-        super(nome, documento, endereco, telefone); // Construtor da classe pai
+        super(nome, documento, endereco, telefone);
         this.idade = idade;
         this.cnh = cnh;
     }
 
-    public int getIdade() {
-        return idade;
-    }
-
-    public String getCnh() {
-        return cnh;
-    }
-
     @Override
     public double calcularDescontoDias(int diasAlugados) {
-        return (diasAlugados > 5) ? 0.05 : 0; // 5% de desconto se alugar por mais de 5 dias
+        return (diasAlugados > 5) ? 0.05 : 0;
     }
 
     @Override
     public String toString() {
         return String.format("Cliente PF -> Nome: %s | Documento: %s | Endereço: %s | Telefone: %d | Idade: %d | CNH: %s",
                 getNome(), getDocumento(), getEndereco(), getTelefone(), idade, cnh);
+    }
+
+    @Override
+    public String getNome() {
+        return super.getNome();
+    }
+
+    @Override
+    public String getDocumento() {
+        return super.getDocumento();
+    }
+
+    @Override
+    public String getEndereco() {
+        return super.getEndereco();
+    }
+
+    @Override
+    public long getTelefone() {
+        return super.getTelefone();
     }
 
     public static void realizarCadastro(Sistema sistema) {

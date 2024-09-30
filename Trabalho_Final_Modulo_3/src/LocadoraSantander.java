@@ -12,7 +12,7 @@ public class LocadoraSantander {
         this.cliente = cliente;
         this.agencia = agencia;
         this.aluguelData = aluguelData;
-        this.devolucaoData = null; // Inicializa como nulo
+        this.devolucaoData = null;
     }
 
     public Veiculo getVeiculo() {
