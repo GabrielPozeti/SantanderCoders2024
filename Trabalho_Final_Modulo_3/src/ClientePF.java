@@ -21,7 +21,6 @@ public class ClientePF extends Cliente<String> implements ICliente<String> {
                 getNome(), getDocumento(), getEndereco(), getTelefone(), idade, cnh);
     }
 
-    // Métodos getters
     @Override
     public String getNome() {
         return super.getNome();

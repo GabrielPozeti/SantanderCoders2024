@@ -183,7 +183,7 @@ public class Sistema {
         System.out.println("Veículo alugado com sucesso!");
     }
 
-    public void entregarVeiculo(String documentoCliente, String modeloVeiculo, String cidadeAgencia) {
+    public void entregarVeiculo(String documentoCliente, String modeloVeiculo, String nomeAgenciaDevolucao) {
         LocadoraSantander aluguelEncontrado = null;
         for (LocadoraSantander aluguel : alugueis) {
             if (aluguel.getCliente().getDocumento().equals(documentoCliente) &&
@@ -193,8 +193,15 @@ public class Sistema {
                 break;
             }
         }
+
         if (aluguelEncontrado != null) {
-            aluguelEncontrado.entregarVeiculo(LocalDateTime.now(), buscarAgenciaPorCidade(cidadeAgencia));
+            Agencia agenciaDevolucao = buscarAgenciaPorNome(nomeAgenciaDevolucao);
+            if (agenciaDevolucao == null) {
+                System.out.println("Agência para devolução não encontrada.");
+                return;
+            }
+
+            aluguelEncontrado.entregarVeiculo(LocalDateTime.now(), agenciaDevolucao);
             System.out.println("Veículo entregue com sucesso!\n");
             System.out.println("Comprovante:");
             System.out.println("Dados do Cliente: ");

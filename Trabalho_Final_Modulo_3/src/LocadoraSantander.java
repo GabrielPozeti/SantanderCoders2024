@@ -35,11 +35,12 @@ public class LocadoraSantander {
         return devolucaoData;
     }
 
-    public void entregarVeiculo(LocalDateTime dataDevolucao, Agencia agencia) {
+    public void entregarVeiculo(LocalDateTime dataDevolucao, Agencia agenciaDevolucao) {
         this.devolucaoData = dataDevolucao;
-        this.agencia = agencia;
+        this.agencia = agenciaDevolucao;
         veiculo.setAlugado(false);
     }
+
 
     public double getValorTotal() {
         if (devolucaoData != null) {
