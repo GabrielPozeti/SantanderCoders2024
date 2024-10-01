@@ -27,10 +27,6 @@ public class LocadoraSantander {
         return agencia;
     }
 
-    public LocalDateTime getAluguelData() {
-        return aluguelData;
-    }
-
     public LocalDateTime getDevolucaoData() {
         return devolucaoData;
     }
