@@ -1,13 +1,13 @@
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class LocadoraSantander {
     final private Veiculo veiculo;
     final private Cliente cliente;
     private Agencia agencia;
-    final private LocalDate aluguelData;
-    private LocalDate devolucaoData;
+    final private LocalDateTime aluguelData;
+    private LocalDateTime devolucaoData;
 
-    public LocadoraSantander(Veiculo veiculo, Cliente cliente, Agencia agencia, LocalDate aluguelData) {
+    public LocadoraSantander(Veiculo veiculo, Cliente cliente, Agencia agencia, LocalDateTime aluguelData) {
         this.veiculo = veiculo;
         this.cliente = cliente;
         this.agencia = agencia;
@@ -27,15 +27,15 @@ public class LocadoraSantander {
         return agencia;
     }
 
-    public LocalDate getAluguelData() {
+    public LocalDateTime getAluguelData() {
         return aluguelData;
     }
 
-    public LocalDate getDevolucaoData() {
+    public LocalDateTime getDevolucaoData() {
         return devolucaoData;
     }
 
-    public void entregarVeiculo(LocalDate dataDevolucao, Agencia agenciaDevolucao) {
+    public void entregarVeiculo(LocalDateTime dataDevolucao, Agencia agenciaDevolucao) {
         this.devolucaoData = dataDevolucao;
         this.agencia = agenciaDevolucao;
         veiculo.setAlugado(false);

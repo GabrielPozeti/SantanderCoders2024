@@ -1,4 +1,5 @@
-import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,6 +9,10 @@ public class Sistema {
     final private List<ClientePJ> listaDeClientesPJ;
     final private List<Agencia> agencias;
     final private List<LocadoraSantander> alugueis;
+
+    LocalDateTime dataHoraAluguel = LocalDateTime.now();
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+    String dataHoraFormatada = dataHoraAluguel.format(formatter);
 
     public Sistema() {
         veiculos = new ArrayList<>();
@@ -173,7 +178,7 @@ public class Sistema {
             return;
         }
 
-        LocadoraSantander aluguel = new LocadoraSantander(veiculo, cliente, agencia, LocalDate.now());
+        LocadoraSantander aluguel = new LocadoraSantander(veiculo, cliente, agencia, LocalDateTime.now());
         alugueis.add(aluguel);
         veiculo.alugar();
         System.out.println("Veículo alugado com sucesso!\n");
@@ -186,10 +191,10 @@ public class Sistema {
         System.out.println("Placa: " + aluguel.getVeiculo().getPlaca());
         System.out.println("Cor: " + aluguel.getVeiculo().getCor() + "\n");
         System.out.println("Alugado na Agência: " + aluguel.getAgencia().getNome() + ", na cidade de " + aluguel.getAgencia().getCidade() + "\n");
-        System.out.println("Data do Aluguel: " + aluguel.getAluguelData());
+        System.out.println("Data e Hora do Aluguel: " + dataHoraFormatada);
     }
 
-    public void entregarVeiculo(String documentoCliente, String modeloVeiculo, String nomeAgenciaDevolucao) {
+    public void entregarVeiculo(String documentoCliente, String modeloVeiculo, String cidadeAgenciaDevolucao) {
         LocadoraSantander aluguelEncontrado = null;
         for (LocadoraSantander aluguel : alugueis) {
             if (aluguel.getCliente().getDocumento().equals(documentoCliente) &&
@@ -201,13 +206,13 @@ public class Sistema {
         }
 
         if (aluguelEncontrado != null) {
-            Agencia agenciaDevolucao = buscarAgenciaPorNome(nomeAgenciaDevolucao);
+            Agencia agenciaDevolucao = buscarAgenciaPorCidade(cidadeAgenciaDevolucao);
             if (agenciaDevolucao == null) {
                 System.out.println("Agência para devolução não encontrada.");
                 return;
             }
 
-            aluguelEncontrado.entregarVeiculo(LocalDate.now(), agenciaDevolucao);
+            aluguelEncontrado.entregarVeiculo(LocalDateTime.now(), agenciaDevolucao);
             System.out.println("Veículo entregue com sucesso!\n");
             System.out.println("Comprovante:");
             System.out.println("Dados do Cliente: ");
@@ -219,8 +224,7 @@ public class Sistema {
             System.out.println("Placa: " + aluguelEncontrado.getVeiculo().getPlaca());
             System.out.println("Cor: " + aluguelEncontrado.getVeiculo().getCor() + "\n");
             System.out.println("Agência: " + aluguelEncontrado.getAgencia().getNome() + ", na cidade de " + aluguelEncontrado.getAgencia().getCidade() + "\n");
-            System.out.println("Data do Aluguel: " + aluguelEncontrado.getAluguelData());
-            System.out.println("Data de Devolução: " + aluguelEncontrado.getDevolucaoData() + "\n");
+            System.out.println("Data e Hora da Devolução: " + dataHoraFormatada + "\n");
             System.out.printf("Valor Total: R$%.2f\n", aluguelEncontrado.getValorTotal());
         } else {
             System.out.println("Nenhum aluguel encontrado para este cliente e veículo.");

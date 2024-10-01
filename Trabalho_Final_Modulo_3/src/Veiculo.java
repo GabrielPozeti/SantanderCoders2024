@@ -53,8 +53,8 @@ public abstract class Veiculo {
     public boolean equals(Object obj) {
         if (this == obj) return true;
         if (!(obj instanceof Veiculo)) return false;
-        Veiculo other = (Veiculo) obj;
-        return placa.equals(other.placa);
+        Veiculo outro = (Veiculo) obj;
+        return placa.equals(outro.placa);
     }
 
     @Override
