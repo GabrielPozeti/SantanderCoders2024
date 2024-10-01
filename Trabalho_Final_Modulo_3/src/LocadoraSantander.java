@@ -1,10 +1,10 @@
 import java.time.LocalDate;
 
 public class LocadoraSantander {
-    private Veiculo veiculo;
-    private Cliente cliente;
+    final private Veiculo veiculo;
+    final private Cliente cliente;
     private Agencia agencia;
-    private LocalDate aluguelData;
+    final private LocalDate aluguelData;
     private LocalDate devolucaoData;
 
     public LocadoraSantander(Veiculo veiculo, Cliente cliente, Agencia agencia, LocalDate aluguelData) {

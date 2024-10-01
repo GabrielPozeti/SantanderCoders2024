@@ -3,11 +3,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Sistema {
-    private List<Veiculo> veiculos;
-    private List<Cliente> clientes;
-    private List<ClientePJ> listaDeClientesPJ;
-    private List<Agencia> agencias;
-    private List<LocadoraSantander> alugueis;
+    final private List<Veiculo> veiculos;
+    final private List<Cliente> clientes;
+    final private List<ClientePJ> listaDeClientesPJ;
+    final private List<Agencia> agencias;
+    final private List<LocadoraSantander> alugueis;
 
     public Sistema() {
         veiculos = new ArrayList<>();
@@ -15,10 +15,6 @@ public class Sistema {
         listaDeClientesPJ = new ArrayList<>();
         agencias = new ArrayList<>();
         alugueis = new ArrayList<>();
-    }
-
-    public List<ClientePJ> getListaDeClientesPJ() {
-        return listaDeClientesPJ;
     }
 
     // VEÍCULOS

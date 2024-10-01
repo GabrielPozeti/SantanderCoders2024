@@ -153,7 +153,7 @@ public class Main {
                 1- Cadastrar nova Pessoa Física
                 2- Cadastrar nova Pessoa Jurídica
                 0- Retornar ao menu inicial""");
-            int escolha = -1;
+            int escolha;
 
             try {
                 escolha = input.nextInt();

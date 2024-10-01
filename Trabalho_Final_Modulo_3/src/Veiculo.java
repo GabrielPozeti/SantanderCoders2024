@@ -1,5 +1,5 @@
 public abstract class Veiculo {
-    private String modelo;
+    final private String modelo;
     private String placa;
     private String cor;
     private boolean alugado;
@@ -20,10 +20,6 @@ public abstract class Veiculo {
             throw new IllegalArgumentException("A placa não pode ser nula ou vazia.");
         }
         this.placa = placa;
-    }
-
-    public void setModelo(String modelo) {
-        this.modelo = modelo;
     }
 
     public void setCor(String cor) {
