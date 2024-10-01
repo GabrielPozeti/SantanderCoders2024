@@ -17,4 +17,8 @@ public class Caminhao extends Veiculo {
     public void devolver() {
 
     }
+    @Override
+    public String toString() {
+        return super.toString() + " | Tipo: Caminhão";
+    }
 }

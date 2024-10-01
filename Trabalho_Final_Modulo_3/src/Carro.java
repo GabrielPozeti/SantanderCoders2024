@@ -17,4 +17,10 @@ public class Carro extends Veiculo {
     public void devolver() {
 
     }
+
+    @Override
+    public String toString() {
+        return super.toString() + " | Tipo: Carro";
+    }
 }
+
