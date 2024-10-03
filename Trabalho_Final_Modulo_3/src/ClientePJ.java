@@ -21,6 +21,26 @@ public class ClientePJ extends Cliente<String> implements ICliente<String> {
     }
 
     @Override
+    public String getNome() {
+        return super.getNome();
+    }
+
+    @Override
+    public String getDocumento() {
+        return super.getDocumento();
+    }
+
+    @Override
+    public String getEndereco() {
+        return super.getEndereco();
+    }
+
+    @Override
+    public long getTelefone() {
+        return super.getTelefone();
+    }
+
+    @Override
     public String toString() {
         return "ClientePJ{" +
                 "nome='" + getNome() + '\'' +
@@ -40,6 +60,10 @@ public class ClientePJ extends Cliente<String> implements ICliente<String> {
         System.out.println("Documento: " + getDocumento());
         System.out.println("Endereço: " + getEndereco());
         System.out.println("Telefone: " + getTelefone());
+        System.out.println("Nome do Responsável: " + nomeDoResponsavel);
+        System.out.println("CNH do Responsável: " + cnhDoResponsavel);
+        System.out.println("Idade do Responsável: " + idadeDoResponsavel);
+        System.out.println("Função do Responsável: " + funcaoDoResponsavel);
     }
 
     public static void realizarCadastro(Sistema sistema) {

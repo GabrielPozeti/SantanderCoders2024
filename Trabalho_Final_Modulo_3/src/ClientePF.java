@@ -16,6 +16,26 @@ public class ClientePF extends Cliente<String> implements ICliente<String> {
     }
 
     @Override
+    public String getNome() {
+        return super.getNome();
+    }
+
+    @Override
+    public String getDocumento() {
+        return super.getDocumento();
+    }
+
+    @Override
+    public String getEndereco() {
+        return super.getEndereco();
+    }
+
+    @Override
+    public long getTelefone() {
+        return super.getTelefone();
+    }
+
+    @Override
     public String toString() {
         return "ClientePF{" +
                 "nome='" + getNome() + '\'' +
