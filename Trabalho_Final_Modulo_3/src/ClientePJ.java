@@ -20,6 +20,20 @@ public class ClientePJ extends Cliente<String> implements ICliente<String> {
         return (diasAlugados > 3) ? 0.10 : 0;
     }
 
+    @Override
+    public String toString() {
+        return "ClientePJ{" +
+                "nome='" + super.getNome() + '\'' +
+                ", documento='" + super.getDocumento() + '\'' +
+                ", endereco='" + super.getEndereco() + '\'' +
+                ", telefone=" + super.getTelefone() +
+                ", nomeDoResponsavel='" + nomeDoResponsavel + '\'' +
+                ", cnhDoResponsavel='" + cnhDoResponsavel + '\'' +
+                ", idadeDoResponsavel=" + idadeDoResponsavel +
+                ", funcaoDoResponsavel='" + funcaoDoResponsavel + '\'' +
+                '}';
+    }
+
     public static void realizarCadastro(Sistema sistema) {
         Scanner input = new Scanner(System.in);
 

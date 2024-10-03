@@ -15,6 +15,18 @@ public class ClientePF extends Cliente<String> implements ICliente<String> {
         return (diasAlugados > 5) ? 0.05 : 0;
     }
 
+    @Override
+    public String toString() {
+        return "ClientePF{" +
+                "nome='" + super.getNome() + '\'' +
+                ", documento='" + super.getDocumento() + '\'' +
+                ", endereco='" + super.getEndereco() + '\'' +
+                ", telefone=" + super.getTelefone() +
+                ", idade=" + idade +
+                ", cnh='" + cnh + '\'' +
+                '}';
+    }
+
     public static void realizarCadastro(Sistema sistema) {
         Scanner input = new Scanner(System.in);
 
