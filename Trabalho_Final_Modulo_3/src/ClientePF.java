@@ -37,14 +37,8 @@ public class ClientePF extends Cliente<String> implements ICliente<String> {
 
     @Override
     public String toString() {
-        return "ClientePF{" +
-                "nome='" + getNome() + '\'' +
-                ", documento='" + getDocumento() + '\'' +
-                ", endereco='" + getEndereco() + '\'' +
-                ", telefone=" + getTelefone() +
-                ", idade=" + idade +
-                ", cnh='" + cnh + '\'' +
-                '}';
+        return String.format("Cliente PF -> Nome: %s | Documento: %s | Endereço: %s | Telefone: %d | Idade: %d | CNH: %s",
+                getNome(), getDocumento(), getEndereco(), getTelefone(), idade, cnh);
     }
 
     public void exibirInformacoes() {

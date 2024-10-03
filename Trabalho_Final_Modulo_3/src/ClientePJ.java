@@ -42,17 +42,10 @@ public class ClientePJ extends Cliente<String> implements ICliente<String> {
 
     @Override
     public String toString() {
-        return "ClientePJ{" +
-                "nome='" + getNome() + '\'' +
-                ", documento='" + getDocumento() + '\'' +
-                ", endereco='" + getEndereco() + '\'' +
-                ", telefone=" + getTelefone() +
-                ", nomeDoResponsavel='" + nomeDoResponsavel + '\'' +
-                ", cnhDoResponsavel='" + cnhDoResponsavel + '\'' +
-                ", idadeDoResponsavel=" + idadeDoResponsavel +
-                ", funcaoDoResponsavel='" + funcaoDoResponsavel + '\'' +
-                '}';
+        return String.format("Cliente PJ -> Nome da Empresa: %s | CNPJ: %s | Endereço: %s | Telefone: %d | Nome do Responsável: %s | CNH do Responsável: %s | Idade do Responsável: %d | Função do Responsável: %s",
+                getNome(), getDocumento(), getEndereco(), getTelefone(), nomeDoResponsavel, cnhDoResponsavel, idadeDoResponsavel, funcaoDoResponsavel);
     }
+
 
     public void exibirInformacoes() {
         System.out.println("Informações do Cliente:");
