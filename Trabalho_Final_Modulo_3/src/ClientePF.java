@@ -18,13 +18,21 @@ public class ClientePF extends Cliente<String> implements ICliente<String> {
     @Override
     public String toString() {
         return "ClientePF{" +
-                "nome='" + super.getNome() + '\'' +
-                ", documento='" + super.getDocumento() + '\'' +
-                ", endereco='" + super.getEndereco() + '\'' +
-                ", telefone=" + super.getTelefone() +
+                "nome='" + getNome() + '\'' +
+                ", documento='" + getDocumento() + '\'' +
+                ", endereco='" + getEndereco() + '\'' +
+                ", telefone=" + getTelefone() +
                 ", idade=" + idade +
                 ", cnh='" + cnh + '\'' +
                 '}';
+    }
+
+    public void exibirInformacoes() {
+        System.out.println("Informações do Cliente:");
+        System.out.println("Nome: " + getNome());
+        System.out.println("Documento: " + getDocumento());
+        System.out.println("Endereço: " + getEndereco());
+        System.out.println("Telefone: " + getTelefone());
     }
 
     public static void realizarCadastro(Sistema sistema) {
@@ -54,5 +62,6 @@ public class ClientePF extends Cliente<String> implements ICliente<String> {
         sistema.cadastrarCliente(clientePF);
 
         System.out.println("Cliente Pessoa Física cadastrado com sucesso!");
+        clientePF.exibirInformacoes();
     }
 }
