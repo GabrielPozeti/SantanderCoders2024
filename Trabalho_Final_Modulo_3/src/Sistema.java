@@ -33,32 +33,28 @@ public class Sistema {
     }
 
     public Veiculo buscarVeiculoPorModelo(String parteDoNome) {
-        for (Veiculo veiculo : veiculos) {
-            if (veiculo.getModelo().toLowerCase().contains(parteDoNome.toLowerCase())) {
-                return veiculo;
-            }
-        }
-        return null;
+        return veiculos.stream()
+                .filter(veiculo -> veiculo.getModelo().toLowerCase().contains(parteDoNome.toLowerCase()))
+                .findFirst()
+                .orElse(null);
     }
 
     public void alterarVeiculo(String placaAntiga, String novaPlaca, String modelo, String novaCor) {
-        Veiculo veiculo = buscarVeiculoPorModelo(modelo);
-        if (veiculo != null && veiculo.getPlaca().equals(placaAntiga)) {
-            veiculo.setPlaca(novaPlaca);
-            veiculo.setCor(novaCor);
-            System.out.println("Veículo alterado com sucesso!");
-        } else {
-            System.out.println("Veículo não encontrado no sistema.");
-        }
+        veiculos.stream()
+                .filter(veiculo -> veiculo.getModelo().equals(modelo) && veiculo.getPlaca().equals(placaAntiga))
+                .findFirst()
+                .ifPresentOrElse(veiculo -> {
+                    veiculo.setPlaca(novaPlaca);
+                    veiculo.setCor(novaCor);
+                    System.out.println("Veículo alterado com sucesso!");
+                }, () -> System.out.println("Veículo não encontrado no sistema."));
     }
 
     public void listarVeiculos() {
         if (veiculos.isEmpty()) {
             System.out.println("Nenhum veículo cadastrado no sistema.");
         } else {
-            for (Veiculo veiculo : veiculos) {
-                System.out.println(veiculo);
-            }
+            veiculos.forEach(System.out::println);
         }
     }
 
@@ -73,21 +69,17 @@ public class Sistema {
     }
 
     public Agencia buscarAgenciaPorNome(String nome) {
-        for (Agencia agencia : agencias) {
-            if (agencia.getNome().equalsIgnoreCase(nome)) {
-                return agencia;
-            }
-        }
-        return null;
+        return agencias.stream()
+                .filter(agencia -> agencia.getNome().equalsIgnoreCase(nome))
+                .findFirst()
+                .orElse(null);
     }
 
     public Agencia buscarAgenciaPorCidade(String cidade) {
-        for (Agencia agencia : agencias) {
-            if (agencia.getCidade().equalsIgnoreCase(cidade)) {
-                return agencia;
-            }
-        }
-        return null;
+        return agencias.stream()
+                .filter(agencia -> agencia.getCidade().equalsIgnoreCase(cidade))
+                .findFirst()
+                .orElse(null);
     }
 
     public void alterarAgencia(String novoNome, String cidade, String novaCidade) {
@@ -105,9 +97,7 @@ public class Sistema {
         if (agencias.isEmpty()) {
             System.out.println("Nenhuma agência cadastrada no sistema.");
         } else {
-            for (Agencia agencia : agencias) {
-                System.out.println(agencia);
-            }
+            agencias.forEach(System.out::println);
         }
     }
 
@@ -126,21 +116,17 @@ public class Sistema {
     }
 
     public Cliente procurarClientePeloDocumento(String documento) {
-        for (Cliente cliente : clientes) {
-            if (cliente.getDocumento().equals(documento)) {
-                return cliente;
-            }
-        }
-        return null;
+        return clientes.stream()
+                .filter(cliente -> cliente.getDocumento().equals(documento))
+                .findFirst()
+                .orElse(null);
     }
 
     public void listarClientes() {
         if (clientes.isEmpty()) {
             System.out.println("Nenhum cliente cadastrado no sistema.");
         } else {
-            for (Cliente cliente : clientes) {
-                System.out.println(cliente);
-            }
+            clientes.forEach(System.out::println);
         }
     }
 
@@ -150,9 +136,7 @@ public class Sistema {
             System.out.println("Nenhuma locação registrada no sistema.");
         } else {
             System.out.println("Lista de Locações:");
-            for (LocadoraSantander aluguel : alugueis) {
-                System.out.println(aluguel);
-            }
+            alugueis.forEach(System.out::println);
         }
     }
 
@@ -195,15 +179,12 @@ public class Sistema {
     }
 
     public void entregarVeiculo(String documentoCliente, String modeloVeiculo, String cidadeAgenciaDevolucao) {
-        LocadoraSantander aluguelEncontrado = null;
-        for (LocadoraSantander aluguel : alugueis) {
-            if (aluguel.getCliente().getDocumento().equals(documentoCliente) &&
-                    aluguel.getVeiculo().getModelo().equals(modeloVeiculo) &&
-                    aluguel.getDevolucaoData() == null) {
-                aluguelEncontrado = aluguel;
-                break;
-            }
-        }
+        LocadoraSantander aluguelEncontrado = alugueis.stream()
+                .filter(aluguel -> aluguel.getCliente().getDocumento().equals(documentoCliente) &&
+                        aluguel.getVeiculo().getModelo().equals(modeloVeiculo) &&
+                        aluguel.getDevolucaoData() == null)
+                .findFirst()
+                .orElse(null);
 
         if (aluguelEncontrado != null) {
             Agencia agenciaDevolucao = buscarAgenciaPorCidade(cidadeAgenciaDevolucao);
