@@ -1,58 +1,65 @@
 import java.time.LocalDateTime;
 
 public class LocadoraSantander {
-    final private Veiculo veiculo;
-    final private Cliente cliente;
+    private Veiculo veiculo;
+    private Cliente cliente;
     private Agencia agencia;
-    final private LocalDateTime aluguelData;
+    private LocalDateTime dataHoraAluguel;
     private LocalDateTime devolucaoData;
+    private double valorTotal;
 
-    public LocadoraSantander(Veiculo veiculo, Cliente cliente, Agencia agencia, LocalDateTime aluguelData) {
+    public LocadoraSantander(Veiculo veiculo, Cliente cliente, Agencia agencia, LocalDateTime dataHoraAluguel) {
         this.veiculo = veiculo;
         this.cliente = cliente;
         this.agencia = agencia;
-        this.aluguelData = aluguelData;
-        this.devolucaoData = null;
+        this.dataHoraAluguel = dataHoraAluguel;
+        this.valorTotal = calcularValorTotal();
     }
 
-    public Veiculo getVeiculo() {
-        return veiculo;
+    public void entregarVeiculo(LocalDateTime devolucaoData, Agencia agenciaDevolucao) {
+        this.devolucaoData = devolucaoData;
+        this.agencia = agenciaDevolucao;
+        veiculo.devolver();
+    }
+
+    public double getValorTotal() {
+        return valorTotal;
+    }
+
+    private double calcularValorTotal() {
+
+        return 100.0;
     }
 
     public Cliente getCliente() {
         return cliente;
     }
 
+    public Veiculo getVeiculo() {
+        return veiculo;
+    }
+
     public Agencia getAgencia() {
         return agencia;
+    }
+
+    public LocalDateTime getDataHoraAluguel() {
+        return dataHoraAluguel;
     }
 
     public LocalDateTime getDevolucaoData() {
         return devolucaoData;
     }
 
-    public void entregarVeiculo(LocalDateTime dataDevolucao, Agencia agenciaDevolucao) {
-        this.devolucaoData = dataDevolucao;
-        this.agencia = agenciaDevolucao;
-        veiculo.setAlugado(false);
-    }
-
-
-    public double getValorTotal() {
-        if (devolucaoData != null) {
-            long dias = aluguelData.until(devolucaoData, java.time.temporal.ChronoUnit.DAYS) + 1;
-            return veiculo.getValorDiaria() * dias;
-        }
-        return 0.0;
-    }
-
     @Override
     public String toString() {
-        return "Locação: " +
-                "Veículo: " + veiculo.getModelo() +
-                ", Cliente: " + cliente.getNome() +
-                ", Agência: " + agencia.getNome() +
-                ", Data do Aluguel: " + aluguelData +
-                ", Data de Devolução: " + devolucaoData;
+        return "LocadoraSantander{" +
+                "veiculo=" + veiculo +
+                ", cliente=" + cliente +
+                ", agencia=" + agencia +
+                ", dataHoraAluguel=" + dataHoraAluguel +
+                ", devolucaoData=" + devolucaoData +
+                ", valorTotal=" + valorTotal +
+                '}';
     }
 }
