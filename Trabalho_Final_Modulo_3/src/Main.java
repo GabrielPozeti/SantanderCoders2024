@@ -31,6 +31,9 @@ public class Main {
                 case 14 -> salvarClientesNoExcel();
                 case 15 -> salvarVeiculosNoExcel();
                 case 16 -> salvarAgenciasNoExcel();
+                case 17 -> editarCliente();
+                case 18 -> editarVeiculo();
+                case 19 -> editarAgencia();
                 case 0 -> System.exit(0);
                 default -> System.out.println("Escolha inválida, por favor digite uma opção válida");
             }
@@ -40,35 +43,38 @@ public class Main {
     public static void exibirMenu() {
         System.out.println("""
                 \nMenu Aluguel de Veículos:
-                
+
                 Clientes:
                 1- Cadastrar novo cliente
                 2- Buscar cliente
                 3- Verificar lista de clientes
-                
+                17- Editar cliente
+
                 Veículos:
                 4- Cadastrar novo veículo
                 5- Alterar veículo cadastrado
                 6- Buscar veículo
                 7- Verificar lista de veículos
-                
+                18- Editar veículo
+
                 Agência:
                 8- Cadastrar nova agência
                 9- Alterar agência cadastrada
                 10- Verificar lista de agências
-                
+                19- Editar agência
+
                 Locação:
                 11- Alugar veículo
                 12- Devolver veículo
                 13- Verificar lista de veículos alugados
-                
+
                 Exportação:
                 14- Exportar clientes para CSV
                 15- Exportar veículos para CSV
                 16- Exportar agências para CSV
-                
+
                 0- Sair
-                
+
                 Digite o número da opção desejada:
                 """);
     }
@@ -126,6 +132,30 @@ public class Main {
             System.out.println("Cliente encontrado: " + buscaCliente.get());
         } else {
             System.out.println("Cliente não encontrado no sistema.");
+        }
+    }
+
+    public static void editarCliente() {
+        System.out.print("Digite o documento do cliente a ser editado: ");
+        String documento = input.nextLine();
+
+        System.out.print("Novo nome: ");
+        String novoNome = input.nextLine();
+
+        System.out.print("Novo documento: ");
+        String novoDocumento = input.nextLine();
+
+        System.out.print("Nova idade: ");
+        String novaIdade = input.nextLine();
+
+        System.out.print("Novo telefone: ");
+        String novoTelefone = input.nextLine();
+
+        try {
+            sistema.editarCliente(documento, novoNome, novoDocumento, novaIdade, novoTelefone);
+            System.out.println("Cliente editado com sucesso.");
+        } catch (IOException e) {
+            System.out.println("Erro ao editar cliente: " + e.getMessage());
         }
     }
 
@@ -193,6 +223,31 @@ public class Main {
         sistema.alterarVeiculo(placaAntiga, novaPlaca, modelo, novaCor);
     }
 
+    public static void editarVeiculo() {
+        System.out.print("Digite a placa do veículo a ser editado: ");
+        String placa = input.nextLine();
+
+        System.out.print("Novo modelo: ");
+        String novoModelo = input.nextLine();
+
+        System.out.print("Nova placa: ");
+        String novaPlaca = input.nextLine();
+
+        System.out.print("Nova cor: ");
+        String novaCor = input.nextLine();
+
+        System.out.print("Está alugado (true/false): ");
+        boolean alugado = input.nextBoolean();
+        input.nextLine(); // consume the newline
+
+        try {
+            sistema.editarVeiculo(placa, novoModelo, novaPlaca, novaCor, alugado);
+            System.out.println("Veículo editado com sucesso.");
+        } catch (IOException e) {
+            System.out.println("Erro ao editar veículo: " + e.getMessage());
+        }
+    }
+
     public static void buscarVeiculo() {
         System.out.print("Digite o modelo do veículo que deseja encontrar: ");
         String parteDoNome = input.nextLine();
@@ -240,6 +295,21 @@ public class Main {
         sistema.alterarAgencia(novoNome, cidade, novaCidade);
     }
 
+    public static void editarAgencia() {
+        System.out.print("Digite o nome da agência a ser editada: ");
+        String nome = input.nextLine();
+
+        System.out.print("Nova cidade: ");
+        String novaCidade = input.nextLine();
+
+        try {
+            sistema.editarAgencia(nome, novaCidade);
+            System.out.println("Agência editada com sucesso.");
+        } catch (IOException e) {
+            System.out.println("Erro ao editar agência: " + e.getMessage());
+        }
+    }
+
     public static void listarAgencias() {
         System.out.println("Lista de Agências: ");
         sistema.listarAgencias();
@@ -284,7 +354,7 @@ public class Main {
     public static void salvarClientesNoExcel() {
         try {
             sistema.salvarClientesExcel();
-            System.out.println("Clientes exportados com sucesso para");
+            System.out.println("Clientes exportados com sucesso");
         } catch (IOException e) {
             System.out.println("Erro ao exportar clientes: " + e.getMessage());
         }

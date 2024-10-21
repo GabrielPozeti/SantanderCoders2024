@@ -138,8 +138,18 @@ public class Sistema {
                 });
     }
 
+    private void criarPastaSeNaoExistir(String caminhoPasta) throws IOException {
+        Path path = Paths.get(caminhoPasta);
+        if (!Files.exists(path)) {
+            Files.createDirectories(path);
+        }
+    }
+
     public void salvarClientesExcel() throws IOException {
-        String caminhoArquivo = "dados/clientes.csv";
+        String caminhoPasta = "dados";
+        String caminhoArquivo = caminhoPasta + "/clientes.csv";
+        criarPastaSeNaoExistir(caminhoPasta);
+
         List<String> linhas = clientes.stream()
                 .map(cliente -> {
                     String idade = (cliente instanceof ClientePF) ? String.valueOf(((ClientePF) cliente).getIdade()) :
@@ -151,7 +161,10 @@ public class Sistema {
     }
 
     public void salvarVeiculosExcel() throws IOException {
-        String caminhoArquivo = "dados/veiculos.csv";
+        String caminhoPasta = "dados";
+        String caminhoArquivo = caminhoPasta + "/veiculos.csv";
+        criarPastaSeNaoExistir(caminhoPasta);
+
         List<String> linhas = veiculos.stream()
                 .map(veiculo -> String.join(",", veiculo.getModelo(), veiculo.getPlaca(), veiculo.getCor(), String.valueOf(veiculo.isAlugado())))
                 .collect(Collectors.toList());
@@ -159,10 +172,71 @@ public class Sistema {
     }
 
     public void salvarAgenciasExcel() throws IOException {
-        String caminhoArquivo = "dados/agencias.csv";
+        String caminhoPasta = "dados";
+        String caminhoArquivo = caminhoPasta + "/agencias.csv";
+        criarPastaSeNaoExistir(caminhoPasta);
+
         List<String> linhas = agencias.stream()
                 .map(agencia -> String.join(",", agencia.getNome(), agencia.getCidade()))
                 .collect(Collectors.toList());
         Files.write(Paths.get(caminhoArquivo), linhas, StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
     }
+
+    public List<String> lerArquivoCSV(String caminhoArquivo) throws IOException {
+        Path path = Paths.get(caminhoArquivo);
+        if (Files.exists(path)) {
+            return Files.readAllLines(path);
+        }
+        return new ArrayList<>();
+    }
+
+    public void atualizarArquivoCSV(String caminhoArquivo, List<String> novasLinhas) throws IOException {
+        Files.write(Paths.get(caminhoArquivo), novasLinhas, StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
+    }
+
+    public void editarCliente(String documento, String novoNome, String novoDocumento, String novaIdade, String novoTelefone) throws IOException {
+        String caminhoArquivo = "dados/clientes.csv";
+        List<String> linhas = lerArquivoCSV(caminhoArquivo);
+        List<String> novasLinhas = linhas.stream()
+                .map(linha -> {
+                    String[] dados = linha.split(",");
+                    if (dados[1].equals(documento)) {
+                        return String.join(",", novoNome, novoDocumento, novaIdade, novoTelefone);
+                    }
+                    return linha;
+                })
+                .collect(Collectors.toList());
+        atualizarArquivoCSV(caminhoArquivo, novasLinhas);
+    }
+
+    public void editarVeiculo(String placa, String novoModelo, String novaPlaca, String novaCor, boolean alugado) throws IOException {
+        String caminhoArquivo = "dados/veiculos.csv";
+        List<String> linhas = lerArquivoCSV(caminhoArquivo);
+        List<String> novasLinhas = linhas.stream()
+                .map(linha -> {
+                    String[] dados = linha.split(",");
+                    if (dados[1].equals(placa)) {
+                        return String.join(",", novoModelo, novaPlaca, novaCor, String.valueOf(alugado));
+                    }
+                    return linha;
+                })
+                .collect(Collectors.toList());
+        atualizarArquivoCSV(caminhoArquivo, novasLinhas);
+    }
+
+    public void editarAgencia(String nome, String novaCidade) throws IOException {
+        String caminhoArquivo = "dados/agencias.csv";
+        List<String> linhas = lerArquivoCSV(caminhoArquivo);
+        List<String> novasLinhas = linhas.stream()
+                .map(linha -> {
+                    String[] dados = linha.split(",");
+                    if (dados[0].equals(nome)) {
+                        return String.join(",", nome, novaCidade);
+                    }
+                    return linha;
+                })
+                .collect(Collectors.toList());
+        atualizarArquivoCSV(caminhoArquivo, novasLinhas);
+    }
 }
+
