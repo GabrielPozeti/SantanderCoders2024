@@ -1,6 +1,7 @@
 import java.util.Optional;
 import java.util.Scanner;
 import java.util.InputMismatchException;
+import java.io.IOException;
 
 public class Main {
 
@@ -27,6 +28,9 @@ public class Main {
                 case 11 -> alugarVeiculo();
                 case 12 -> entregarVeiculo();
                 case 13 -> listarLocacoes();
+                case 14 -> salvarClientesNoExcel();
+                case 15 -> salvarVeiculosNoExcel();
+                case 16 -> salvarAgenciasNoExcel();
                 case 0 -> System.exit(0);
                 default -> System.out.println("Escolha inválida, por favor digite uma opção válida");
             }
@@ -57,6 +61,12 @@ public class Main {
                 11- Alugar veículo
                 12- Devolver veículo
                 13- Verificar lista de veículos alugados
+                
+                Exportação:
+                14- Exportar clientes para CSV
+                15- Exportar veículos para CSV
+                16- Exportar agências para CSV
+                
                 0- Sair
                 
                 Digite o número da opção desejada:
@@ -269,5 +279,32 @@ public class Main {
 
     public static void listarLocacoes() {
         sistema.listarLocacoes();
+    }
+
+    public static void salvarClientesNoExcel() {
+        try {
+            sistema.salvarClientesExcel();
+            System.out.println("Clientes exportados com sucesso para");
+        } catch (IOException e) {
+            System.out.println("Erro ao exportar clientes: " + e.getMessage());
+        }
+    }
+
+    public static void salvarVeiculosNoExcel() {
+        try {
+            sistema.salvarVeiculosExcel();
+            System.out.println("Veículos exportados com sucesso");
+        } catch (IOException e) {
+            System.out.println("Erro ao exportar veículos: " + e.getMessage());
+        }
+    }
+
+    public static void salvarAgenciasNoExcel() {
+        try {
+            sistema.salvarAgenciasExcel();
+            System.out.println("Agências exportadas com sucesso");
+        } catch (IOException e) {
+            System.out.println("Erro ao exportar agências: " + e.getMessage());
+        }
     }
 }

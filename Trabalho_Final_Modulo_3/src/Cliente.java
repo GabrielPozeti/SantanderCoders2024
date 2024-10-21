@@ -17,8 +17,8 @@ public abstract class Cliente<T> {
         return nome;
     }
 
-    public T getDocumento() {
-        return documento;
+    public CharSequence getDocumento() {
+        return (CharSequence) documento;
     }
 
     public String getEndereco() {

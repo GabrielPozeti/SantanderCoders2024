@@ -22,7 +22,7 @@ public class ClientePF extends Cliente<String> implements ICliente<String> {
 
     @Override
     public String getDocumento() {
-        return super.getDocumento();
+        return (String) super.getDocumento();
     }
 
     @Override
@@ -77,5 +77,9 @@ public class ClientePF extends Cliente<String> implements ICliente<String> {
 
         System.out.println("Cliente Pessoa Física cadastrado com sucesso!");
         clientePF.exibirInformacoes();
+    }
+
+    public Object getIdade() {
+        return idade;
     }
 }

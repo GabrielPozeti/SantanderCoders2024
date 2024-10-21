@@ -1,19 +1,20 @@
+import java.io.IOException;
+import java.nio.file.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class Sistema {
-    final private List<Veiculo> veiculos;
-    final private List<Cliente> clientes;
-    final private List<ClientePJ> listaDeClientesPJ;
-    final private List<Agencia> agencias;
-    final private List<LocadoraSantander> alugueis;
+    private final List<Veiculo> veiculos;
+    private final List<Cliente> clientes;
+    private final List<ClientePJ> listaDeClientesPJ;
+    private final List<Agencia> agencias;
+    private final List<LocadoraSantander> alugueis;
 
-    LocalDateTime dataHoraAluguel = LocalDateTime.now();
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
-    String dataHoraFormatada = dataHoraAluguel.format(formatter);
+    private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
 
     public Sistema() {
         veiculos = new ArrayList<>();
@@ -23,14 +24,9 @@ public class Sistema {
         alugueis = new ArrayList<>();
     }
 
-    // VEÍCULOS
     public void cadastrarVeiculo(Veiculo veiculo) {
-        if (veiculos.contains(veiculo)) {
-            System.out.println("Veículo já cadastrado no sistema.");
-            return;
-        }
+        if (veiculos.contains(veiculo)) return;
         veiculos.add(veiculo);
-        System.out.println("Veículo cadastrado com sucesso!");
     }
 
     public Optional<Veiculo> buscarVeiculoPorModelo(String parteDoNome) {
@@ -40,35 +36,22 @@ public class Sistema {
     }
 
     public void alterarVeiculo(String placaAntiga, String novaPlaca, String modelo, String novaCor) {
-        Optional<Veiculo> veiculoOpt = veiculos.stream()
+        veiculos.stream()
                 .filter(v -> v.getModelo().equals(modelo) && v.getPlaca().equals(placaAntiga))
-                .findFirst();
-
-        veiculoOpt.ifPresentOrElse(veiculo -> {
-            veiculo.setPlaca(novaPlaca);
-            veiculo.setCor(novaCor);
-            System.out.println("Veículo alterado com sucesso!");
-        }, () -> System.out.println("Veículo não encontrado no sistema."));
+                .findFirst()
+                .ifPresent(veiculo -> {
+                    veiculo.setPlaca(novaPlaca);
+                    veiculo.setCor(novaCor);
+                });
     }
 
     public void listarVeiculos() {
-        if (veiculos.isEmpty()) {
-            System.out.println("Nenhum veículo cadastrado no sistema.");
-        } else {
-            veiculos.stream()
-                    .map(Veiculo::toString)
-                    .forEach(System.out::println);
-        }
+        veiculos.forEach(System.out::println);
     }
 
-    // AGÊNCIA
     public void cadastrarAgencia(Agencia agencia) {
-        if (agencias.contains(agencia)) {
-            System.out.println("Agência já cadastrada no sistema.");
-            return;
-        }
+        if (agencias.contains(agencia)) return;
         agencias.add(agencia);
-        System.out.println("Nova agência cadastrada com sucesso!");
     }
 
     public Optional<Agencia> buscarAgenciaPorNome(String nome) {
@@ -84,36 +67,21 @@ public class Sistema {
     }
 
     public void alterarAgencia(String novoNome, String cidade, String novaCidade) {
-        Optional<Agencia> agenciaOpt = buscarAgenciaPorCidade(cidade);
-        agenciaOpt.ifPresentOrElse(agencia -> {
-            agencia.setNome(novoNome);
-            agencia.setCidade(novaCidade);
-            System.out.println("Agência alterada com sucesso!");
-        }, () -> System.out.println("Agência não encontrada no sistema."));
+        buscarAgenciaPorCidade(cidade)
+                .ifPresent(agencia -> {
+                    agencia.setNome(novoNome);
+                    agencia.setCidade(novaCidade);
+                });
     }
 
     public void listarAgencias() {
-        if (agencias.isEmpty()) {
-            System.out.println("Nenhuma agência cadastrada no sistema.");
-        } else {
-            agencias.stream()
-                    .map(Agencia::toString)
-                    .forEach(System.out::println);
-        }
+        agencias.forEach(System.out::println);
     }
 
-    // CLIENTES
     public void cadastrarCliente(Cliente cliente) {
-        if (clientes.contains(cliente)) {
-            System.out.println("Cliente já cadastrado no sistema.");
-            return;
-        }
+        if (clientes.contains(cliente)) return;
         clientes.add(cliente);
-        System.out.println("Cliente cadastrado com sucesso!");
-
-        if (cliente instanceof ClientePJ) {
-            listaDeClientesPJ.add((ClientePJ) cliente);
-        }
+        if (cliente instanceof ClientePJ) listaDeClientesPJ.add((ClientePJ) cliente);
     }
 
     public Optional<Cliente> procurarClientePeloDocumento(String documento) {
@@ -126,20 +94,22 @@ public class Sistema {
         if (clientes.isEmpty()) {
             System.out.println("Nenhum cliente cadastrado no sistema.");
         } else {
-            clientes.stream()
-                    .map(Cliente::toString)
-                    .forEach(System.out::println);
+            for (Cliente cliente : clientes) {
+                if (cliente instanceof ClientePF) {
+                    ClientePF clientePF = (ClientePF) cliente;
+                    System.out.printf("Cliente PF -> Nome: %s | Documento: %s | Idade: %d | Telefone: %d%n",
+                            clientePF.getNome(), clientePF.getDocumento(), clientePF.getIdade(), clientePF.getTelefone());
+                } else if (cliente instanceof ClientePJ) {
+                    ClientePJ clientePJ = (ClientePJ) cliente;
+                    System.out.printf("Cliente PJ -> Nome da Empresa: %s | CNPJ: %s | Idade do Responsável: %d | Telefone: %d%n",
+                            clientePJ.getNome(), clientePJ.getDocumento(), clientePJ.getIdadeDoResponsavel(), clientePJ.getTelefone());
+                }
+            }
         }
     }
 
-    // LOCAÇÃO
     public void listarLocacoes() {
-        if (alugueis.isEmpty()) {
-            System.out.println("Nenhuma locação registrada no sistema.");
-        } else {
-            System.out.println("Lista de Locações:");
-            alugueis.forEach(System.out::println);
-        }
+        alugueis.forEach(System.out::println);
     }
 
     public void alugarVeiculo(String documentoCliente, String modeloVeiculo, String cidadeAgencia) {
@@ -147,69 +117,52 @@ public class Sistema {
         Optional<Veiculo> veiculoOpt = buscarVeiculoPorModelo(modeloVeiculo);
         Optional<Agencia> agenciaOpt = buscarAgenciaPorCidade(cidadeAgencia);
 
-        if (clienteOpt.isEmpty()) {
-            System.out.println("Cliente não encontrado no sistema.");
-            return;
-        }
-        if (veiculoOpt.isEmpty()) {
-            System.out.println("Veículo não encontrado no sistema.");
-            return;
-        }
-        if (agenciaOpt.isEmpty()) {
-            System.out.println("Agência não encontrada no sistema.");
-            return;
-        }
-        if (veiculoOpt.get().isAlugado()) {
-            System.out.println("Veículo já está alugado.");
-            return;
-        }
+        if (clienteOpt.isEmpty() || veiculoOpt.isEmpty() || agenciaOpt.isEmpty() || veiculoOpt.get().isAlugado()) return;
 
         LocadoraSantander aluguel = new LocadoraSantander(veiculoOpt.get(), clienteOpt.get(), agenciaOpt.get(), LocalDateTime.now());
         alugueis.add(aluguel);
         veiculoOpt.get().alugar();
-        System.out.println("Veículo alugado com sucesso!\n");
-        System.out.println("Comprovante:");
-        System.out.println("Dados do Cliente: ");
-        System.out.println("Nome: " + aluguel.getCliente().getNome());
-        System.out.println("Documento: " + aluguel.getCliente().getDocumento() + "\n");
-        System.out.println("Dados do Veículo: ");
-        System.out.println("Modelo: " + aluguel.getVeiculo().getModelo());
-        System.out.println("Placa: " + aluguel.getVeiculo().getPlaca());
-        System.out.println("Cor: " + aluguel.getVeiculo().getCor() + "\n");
-        System.out.println("Alugado na Agência: " + aluguel.getAgencia().getNome() + ", na cidade de " + aluguel.getAgencia().getCidade() + "\n");
-        System.out.println("Data e Hora do Aluguel: " + dataHoraFormatada);
     }
 
     public void entregarVeiculo(String documentoCliente, String modeloVeiculo, String cidadeAgenciaDevolucao) {
-        Optional<LocadoraSantander> aluguelOpt = alugueis.stream()
+        alugueis.stream()
                 .filter(aluguel -> aluguel.getCliente().getDocumento().equals(documentoCliente) &&
                         aluguel.getVeiculo().getModelo().equals(modeloVeiculo) &&
                         aluguel.getDevolucaoData() == null)
-                .findFirst();
+                .findFirst()
+                .ifPresent(aluguel -> {
+                    Agencia agenciaDevolucao = buscarAgenciaPorCidade(cidadeAgenciaDevolucao).orElse(null);
+                    if (agenciaDevolucao != null) {
+                        aluguel.entregarVeiculo(LocalDateTime.now(), agenciaDevolucao);
+                    }
+                });
+    }
 
-        if (aluguelOpt.isPresent()) {
-            Agencia agenciaDevolucao = buscarAgenciaPorCidade(cidadeAgenciaDevolucao).orElse(null);
-            if (agenciaDevolucao == null) {
-                System.out.println("Agência para devolução não encontrada.");
-                return;
-            }
+    public void salvarClientesExcel() throws IOException {
+        String caminhoArquivo = "dados/clientes.csv";
+        List<String> linhas = clientes.stream()
+                .map(cliente -> {
+                    String idade = (cliente instanceof ClientePF) ? String.valueOf(((ClientePF) cliente).getIdade()) :
+                            (cliente instanceof ClientePJ) ? String.valueOf(((ClientePJ) cliente).getIdadeDoResponsavel()) : "N/A";
+                    return String.join(",", cliente.getNome(), cliente.getDocumento(), idade, String.valueOf(cliente.getTelefone()));
+                })
+                .collect(Collectors.toList());
+        Files.write(Paths.get(caminhoArquivo), linhas, StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
+    }
 
-            aluguelOpt.get().entregarVeiculo(LocalDateTime.now(), agenciaDevolucao);
-            System.out.println("Veículo entregue com sucesso!\n");
-            System.out.println("Comprovante:");
-            System.out.println("Dados do Cliente: ");
-            System.out.println("Nome: " + aluguelOpt.get().getCliente().getNome());
-            System.out.println("Documento: " + aluguelOpt.get().getCliente().getDocumento());
-            System.out.println("Telefone: " + aluguelOpt.get().getCliente().getTelefone() + "\n");
-            System.out.println("Dados do Veículo: ");
-            System.out.println("Modelo: " + aluguelOpt.get().getVeiculo().getModelo());
-            System.out.println("Placa: " + aluguelOpt.get().getVeiculo().getPlaca());
-            System.out.println("Cor: " + aluguelOpt.get().getVeiculo().getCor() + "\n");
-            System.out.println("Agência: " + aluguelOpt.get().getAgencia().getNome() + ", na cidade de " + aluguelOpt.get().getAgencia().getCidade() + "\n");
-            System.out.println("Data e Hora da Devolução: " + dataHoraFormatada + "\n");
-            System.out.printf("Valor Total: R$%.2f\n", aluguelOpt.get().getValorTotal());
-        } else {
-            System.out.println("Nenhum aluguel encontrado para este cliente e veículo.");
-        }
+    public void salvarVeiculosExcel() throws IOException {
+        String caminhoArquivo = "dados/veiculos.csv";
+        List<String> linhas = veiculos.stream()
+                .map(veiculo -> String.join(",", veiculo.getModelo(), veiculo.getPlaca(), veiculo.getCor(), String.valueOf(veiculo.isAlugado())))
+                .collect(Collectors.toList());
+        Files.write(Paths.get(caminhoArquivo), linhas, StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
+    }
+
+    public void salvarAgenciasExcel() throws IOException {
+        String caminhoArquivo = "dados/agencias.csv";
+        List<String> linhas = agencias.stream()
+                .map(agencia -> String.join(",", agencia.getNome(), agencia.getCidade()))
+                .collect(Collectors.toList());
+        Files.write(Paths.get(caminhoArquivo), linhas, StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
     }
 }

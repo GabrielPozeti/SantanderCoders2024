@@ -27,7 +27,7 @@ public class ClientePJ extends Cliente<String> implements ICliente<String> {
 
     @Override
     public String getDocumento() {
-        return super.getDocumento();
+        return (String) super.getDocumento();
     }
 
     @Override
@@ -94,5 +94,9 @@ public class ClientePJ extends Cliente<String> implements ICliente<String> {
 
         System.out.println("Cliente Pessoa Jurídica cadastrado com sucesso!");
         clientePJ.exibirInformacoes();
+    }
+
+    public Object getIdadeDoResponsavel() {
+        return idadeDoResponsavel;
     }
 }
